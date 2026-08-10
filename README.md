@@ -100,7 +100,7 @@ npm run dev
 
 No domain is required for local use. `npm run dev` opens the dashboard on this Mac at `http://localhost:3000`. To open it on another phone or computer connected to the same Wi-Fi, run `npm run dev:network` and use this Mac's local network address followed by port `3000`. The Mac must remain awake and the terminal process must keep running. This does not expose the site to the public internet.
 
-The production build is published at [india-evidence-dashboard-public.vercel.app](https://india-evidence-dashboard-public.vercel.app/). The public project uses the standard Next.js adapter so the page and API routes are routed correctly. Credential-dependent data.gov.in panels require `DATA_GOV_IN_API_KEY` to be added separately to the Vercel project; the credential is not committed or transmitted automatically.
+The production build is published at [india-evidence-dashboard-public.vercel.app](https://india-evidence-dashboard-public.vercel.app/). The public project uses the standard Next.js adapter so the page and API routes are routed correctly. The data.gov.in connector is configured with `DATA_GOV_IN_API_KEY` as a Vercel Sensitive production variable; the credential is never committed or sent to browser code.
 
 Validation:
 
