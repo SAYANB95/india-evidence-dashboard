@@ -524,7 +524,6 @@ export default function Home() {
     <main>
       <div className="topline">
         <span><i /> <b lang="hi">भारत</b> / India · Independent civic-data prototype</span>
-        <span>1 open feed · 1 credential-ready official connector</span>
       </div>
 
       <header className="site-header">
