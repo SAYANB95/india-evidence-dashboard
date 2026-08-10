@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 0.7 opens with the India civic-evidence landing screen, places a state-aware economic evidence screen directly below it, includes a full topic/subtopic menu, and provides an all-36-jurisdiction annual evidence matrix from NCRB and ADSI through data.gov.in. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 0.7 opens with the India civic-evidence landing screen, places a state-aware economic evidence screen directly below it, includes a full topic/subtopic menu, and provides credential-ready data.gov.in evidence routes. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 

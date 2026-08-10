@@ -524,7 +524,7 @@ export default function Home() {
     <main>
       <div className="topline">
         <span><i /> <b lang="hi">भारत</b> / India · Independent civic-data prototype</span>
-        <span>2 running public feeds · sources dated individually</span>
+        <span>1 open feed · 1 credential-ready official connector</span>
       </div>
 
       <header className="site-header">
@@ -710,7 +710,7 @@ export default function Home() {
             <h3>Live does not mean<br />the same thing everywhere.</h3>
             <div className="connector-list">
               <div><span className="connector-status connected">Running</span><p><strong>Open-Meteo current conditions</strong><small>Public model-data API · automatic</small></p></div>
-              <div><span className="connector-status connected">Running</span><p><strong>CPCB air quality</strong><small>Official hourly feed · server-side data.gov.in connection</small></p></div>
+              <div><span className={`connector-status ${liveAir ? "connected" : "editorial"}`}>{liveAir ? "Running" : "Credential-ready"}</span><p><strong>CPCB air quality</strong><small>Official hourly feed · server-side data.gov.in key required</small></p></div>
               <div><span className="connector-status key">Restricted</span><p><strong>IMD warnings</strong><small>Government-email registration required · not connected</small></p></div>
               <div><span className="connector-status editorial">Release cycle</span><p><strong>Budgets, audits, forests</strong><small>Updated only when source publications change</small></p></div>
             </div>
@@ -1116,7 +1116,7 @@ export default function Home() {
 
       <footer>
         <div className="brand footer-brand"><span className="brand-mark" aria-hidden="true"><b /><b /><b /></span><span>India Evidence <em>Dashboard</em></span></div>
-        <p>Independent prototype for verifiable public information. No party affiliation or official endorsement. CPCB data is connected through data.gov.in.</p>
+        <p>Independent prototype for verifiable public information. No party affiliation or official endorsement. The CPCB connector requires a server-side data.gov.in key.</p>
         <div><a href="#methodology">Methodology</a><a href="#jurisdictions">Data gaps</a><a href="#top">Back to top ↑</a></div>
       </footer>
 
