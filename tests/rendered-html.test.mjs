@@ -18,6 +18,10 @@ async function renderInfrastructureRegistry() {
   return readFile(new URL("../.next/server/app/infrastructure/registry.html", import.meta.url), "utf8");
 }
 
+async function renderEditorial() {
+  return readFile(new URL("../.next/server/app/editorial.html", import.meta.url), "utf8");
+}
+
 async function readJson(path) {
   return JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 }
@@ -82,4 +86,24 @@ test("registry seeds preserve provenance, unique IDs and explicit gaps", async (
   assert.ok(tolls.some((item) => item.cumulativeRevenueCrore === null), "unknown revenue must remain null");
   assert.ok(projects.some((item) => item.progressValue === null), "unknown progress must remain null");
   assert.ok(tolls.every((item) => item.carSingle === null || item.carSingle > 0));
+});
+
+test("pre-renders a safe read-only editorial evidence console", async () => {
+  const html = await renderEditorial();
+  assert.match(html, /Evidence needs/);
+  assert.match(html, /Persistent provider not connected/);
+  assert.match(html, /No authentication configured/);
+  assert.match(html, /Seed migration queue/);
+  assert.match(html, /Second-person approval/);
+  assert.match(html, /Haladgaon fee plaza/);
+  assert.doesNotMatch(html, /Save changes|Publish now|Delete record/i);
+});
+
+test("database migration preserves evidence, source, review and revision entities", async () => {
+  const sql = await readFile(new URL("../drizzle/0000_silent_sheva_callister.sql", import.meta.url), "utf8");
+  for (const table of ["jurisdictions", "sources", "evidence_records", "observations", "promises", "revisions", "reviews", "corrections"]) {
+    assert.ok(sql.includes(`CREATE TABLE \`${table}\``), `migration must create ${table}`);
+  }
+  assert.match(sql, /record_revision_unique/);
+  assert.match(sql, /source_url_unique/);
 });

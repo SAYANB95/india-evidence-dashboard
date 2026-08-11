@@ -13,7 +13,7 @@ Build a public, politically neutral, source-linked dashboard that covers every I
 
 ## Current release boundary
 
-Version 1.0 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, and a manually verified toll-plaza/project seed registry. It has no database, authentication, upload storage or moderation backend. It must not be described as a complete tracker.
+Version 1.1 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, a manually verified toll-plaza/project seed registry, and a read-only editorial migration console. A normalized database schema exists, but no persistent provider, authentication, upload storage or moderation backend is connected. It must not be described as a complete tracker.
 
 The economic screen uses MoSPI provisional FY 2025–26 national accounts, the Economic Survey state NSDP table for total jurisdiction output, and RBI Handbook Table 9 for per-capita NSDP at current prices. Selecting a state/UT must update both total and per-capita cards; India values must never remain visible as if they belong to the selected state. Both all-jurisdiction series have 33 published values and three explicit gaps; mixed source years must remain visible and must not be presented as a strict same-year ranking. NSDP is not GSDP or household income. The 2.23× liabilities/assets figure compares ₹196.78 lakh crore of budgeted Central Government liabilities with ₹88.28 lakh crore of reported assets defined as cumulative capital outlay plus loans advanced. It is not a valuation of India’s total national or household wealth. Wealth-group shares are World Inequality Lab research estimates for 2022–23, not an official Government of India series; the top 1% is a subset of the top 10% and must not be added to it.
 
@@ -113,6 +113,15 @@ The production road workflow must:
 - Eight road, rail and aviation project/programme records keep milestones, outputs, costs and completion definitions separate.
 - Search, jurisdiction, model/mode filters, expandable provenance and downloadable CSVs are implemented.
 - No plaza is labelled a scam and no ranking is generated. Fraud or excess-charge claims require a bounded CAG, court or competent-authority finding.
+
+## Editorial data foundation in v1.1
+
+- The normalized schema covers jurisdictions, sources, evidence records, observations, promises, revisions, reviews and corrections.
+- Source records preserve publisher, publication/retrieval dates, archive URL, checksum and link-health state.
+- Observation records preserve period, unit, denominator, provisional state and retrieval timestamp.
+- Revision numbers are unique within an evidence record; corrections and reviews remain separate entities.
+- The 16 existing transport records are mapped into a filterable migration queue with explicit missing fields and database-readiness states.
+- The editorial route is read-only and non-indexed. It must remain non-writable until a persistent provider, authentication, role permissions, server validation and second-person publication approval are implemented.
 
 ## Seed sources through v0.8
 

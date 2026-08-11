@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.0 adds a real multi-route evidence platform with a dedicated Transport & Infrastructure evidence room and a source-linked toll-plaza/project registry. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.1 adds a normalized evidence schema and a read-only editorial migration console to the existing multi-route public platform. It is **not** a connected production database, a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -13,6 +13,7 @@ This repository is a public-safe website foundation. Version 1.0 adds a real mul
 - downloadable CSV manifests containing period, status, definition, limitation and source;
 - `/infrastructure`, separating highway construction, maintenance, NHAI debt, toll collection, railway network/traffic/safety, aviation coverage and bounded audit findings;
 - `/infrastructure/registry`, an interactive verified seed register of eight NHTIS toll plazas and eight road, rail and aviation projects/programmes, with filters, expandable evidence and CSV exports;
+- `/editorial`, a deliberately read-only, non-indexed preview of the evidence migration queue, normalized data model and publication gates;
 - an `All data` directory with economy, people/services, safety/infrastructure and accountability subtopics;
 - a selected-jurisdiction total-output card using the latest available official NSDP value for 33 jurisdictions, with three explicit gaps;
 - an economy-first screen with MoSPI national GDP and GDP per capita, RBI per-capita NSDP for 33 of 36 current jurisdictions, a defined Central Government liabilities-to-reported-assets comparison, and a clearly labelled research estimate of wealth distribution;
@@ -100,6 +101,14 @@ The audit ledger uses bounded CAG records. It does not call tolling itself a “
 `/infrastructure/registry` is a manually verified seed explorer, not a bulk mirror of NHTIS. Its eight plaza records cover eight states and show the cited fee schedule, applicable length, capital cost, cumulative revenue, concession and traffic fields only when the official plaza page publishes them. The interface compares that sample with MoRTH's reported 1,051 NH fee plazas with ETC as of 31 December 2024, making the 0.8% coverage gap prominent.
 
 The project register contains eight source-linked road, rail and aviation records. A commercial-operation date, inauguration, route award or technical milestone is not relabelled as complete delivery. Missing cost, deadline, contractor and current-service fields remain `Data gap`. CSV downloads preserve nulls as `Data gap` and the interface provides no toll, fraud, safety or government-performance ranking.
+
+## Editorial data foundation in v1.1
+
+The Drizzle/SQLite schema defines jurisdictions, sources, evidence records, observations, promises, revisions, reviews and corrections. The generated migration is committed so a compatible persistent provider can later be provisioned deliberately. Sources support archival URLs, checksums and link-health state; observations keep period, value, unit, denominator, provisional status and retrieval date; revisions have immutable per-record sequence numbers.
+
+`/editorial` maps the 16 existing toll and infrastructure seed records into a reviewable migration queue. Its workflow labels are database-readiness checks—not publication approval or factual verdicts. The route has no write controls, is marked `noindex`, and clearly states that no persistent provider or authentication system is connected. `/api/editorial/export` downloads the migration manifest as CSV.
+
+Connecting a database, authentication, source archive and write-capable editorial actions remains a separate production step. Do not make the console writable on the public route without role-based access, server-side validation, revision logging and a second-person publication gate.
 
 Never place either credential in browser code. Add them as server-side environment variables after access is approved.
 
