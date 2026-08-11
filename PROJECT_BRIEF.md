@@ -13,7 +13,7 @@ Build a public, politically neutral, source-linked dashboard that covers every I
 
 ## Current release boundary
 
-Version 0.7 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains three verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed and placeholders/data-gap states elsewhere. It has no database, authentication, upload storage or moderation backend. It must not be described as a complete tracker.
+Version 1.0 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, and a manually verified toll-plaza/project seed registry. It has no database, authentication, upload storage or moderation backend. It must not be described as a complete tracker.
 
 The economic screen uses MoSPI provisional FY 2025–26 national accounts, the Economic Survey state NSDP table for total jurisdiction output, and RBI Handbook Table 9 for per-capita NSDP at current prices. Selecting a state/UT must update both total and per-capita cards; India values must never remain visible as if they belong to the selected state. Both all-jurisdiction series have 33 published values and three explicit gaps; mixed source years must remain visible and must not be presented as a strict same-year ranking. NSDP is not GSDP or household income. The 2.23× liabilities/assets figure compares ₹196.78 lakh crore of budgeted Central Government liabilities with ₹88.28 lakh crore of reported assets defined as cumulative capital outlay plus loans advanced. It is not a valuation of India’s total national or household wealth. Wealth-group shares are World Inequality Lab research estimates for 2022–23, not an official Government of India series; the top 1% is a subset of the top 10% and must not be added to it.
 
@@ -105,6 +105,14 @@ The production road workflow must:
 - Aviation evidence separates passenger traffic, airports, awarded/operating routes and viability funding.
 - A bounded CAG ledger records specific road/toll, Bharatmala, railway-track, UDAN and airport-PPP audits without generalising findings beyond the audited scope.
 - Missing state roads, bridges, buses, metros, ports, freight/logistics, safety, land/environment, contract and passenger-experience layers are visible implementation records.
+
+## Toll and project registry in v1.0
+
+- Eight NHTIS toll-plaza records are linked to their official pages and preserve rate, length, cost, revenue, concession and traffic gaps without inference.
+- The interface states that eight records are only 0.8% of MoRTH's reported 1,051 ETC fee plazas as of 31 December 2024; the sample is not presented as representative.
+- Eight road, rail and aviation project/programme records keep milestones, outputs, costs and completion definitions separate.
+- Search, jurisdiction, model/mode filters, expandable provenance and downloadable CSVs are implemented.
+- No plaza is labelled a scam and no ranking is generated. Fraud or excess-charge claims require a bounded CAG, court or competent-authority finding.
 
 ## Seed sources through v0.8
 

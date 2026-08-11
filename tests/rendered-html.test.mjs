@@ -14,6 +14,14 @@ async function renderInfrastructure() {
   return readFile(new URL("../.next/server/app/infrastructure.html", import.meta.url), "utf8");
 }
 
+async function renderInfrastructureRegistry() {
+  return readFile(new URL("../.next/server/app/infrastructure/registry.html", import.meta.url), "utf8");
+}
+
+async function readJson(path) {
+  return JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
+}
+
 test("server-renders the India Evidence Dashboard", async () => {
   const html = await render();
   assert.match(html, /<title>India Evidence Dashboard/);
@@ -50,4 +58,28 @@ test("pre-renders transport finance, service and audit evidence", async () => {
   assert.match(html, /UDAN viability funding/);
   assert.match(html, /Findings, not slogans/);
   assert.match(html, /State roads &amp; bridges/);
+  assert.match(html, /verified toll &amp; project registry/);
+});
+
+test("pre-renders the toll and project evidence registry", async () => {
+  const html = await renderInfrastructureRegistry();
+  assert.match(html, /Plazas and projects/);
+  assert.match(html, /Verified plaza records/);
+  assert.match(html, /Haladgaon/);
+  assert.match(html, /official NHTIS record/i);
+  assert.match(html, /not a complete national database/i);
+});
+
+test("registry seeds preserve provenance, unique IDs and explicit gaps", async () => {
+  const tolls = await readJson("../data/toll-plazas.json");
+  const projects = await readJson("../data/infrastructure-projects.json");
+  assert.equal(tolls.length, 8);
+  assert.equal(projects.length, 8);
+  assert.equal(new Set(tolls.map((item) => item.id)).size, tolls.length);
+  assert.equal(new Set(projects.map((item) => item.id)).size, projects.length);
+  assert.ok(tolls.every((item) => item.sourceUrl.startsWith("https://") && item.feeEffective));
+  assert.ok(projects.every((item) => item.sourceUrl.startsWith("https://") && item.sourcePeriod && item.progressDefinition));
+  assert.ok(tolls.some((item) => item.cumulativeRevenueCrore === null), "unknown revenue must remain null");
+  assert.ok(projects.some((item) => item.progressValue === null), "unknown progress must remain null");
+  assert.ok(tolls.every((item) => item.carSingle === null || item.carSingle > 0));
 });

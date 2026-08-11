@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 0.9 adds a real multi-route evidence platform with a dedicated Transport & Infrastructure evidence room: roads, NHAI finance, tolls, railways, aviation, audits and the missing public-accountability layers. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.0 adds a real multi-route evidence platform with a dedicated Transport & Infrastructure evidence room and a source-linked toll-plaza/project registry. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -12,6 +12,7 @@ This repository is a public-safe website foundation. Version 0.9 adds a real mul
 - `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;
 - downloadable CSV manifests containing period, status, definition, limitation and source;
 - `/infrastructure`, separating highway construction, maintenance, NHAI debt, toll collection, railway network/traffic/safety, aviation coverage and bounded audit findings;
+- `/infrastructure/registry`, an interactive verified seed register of eight NHTIS toll plazas and eight road, rail and aviation projects/programmes, with filters, expandable evidence and CSV exports;
 - an `All data` directory with economy, people/services, safety/infrastructure and accountability subtopics;
 - a selected-jurisdiction total-output card using the latest available official NSDP value for 33 jurisdictions, with three explicit gaps;
 - an economy-first screen with MoSPI national GDP and GDP per capita, RBI per-capita NSDP for 33 of 36 current jurisdictions, a defined Central Government liabilities-to-reported-assets comparison, and a clearly labelled research estimate of wealth distribution;
@@ -93,6 +94,12 @@ UDISE+, SRS, CPI and health-infrastructure records are explicitly periodic. Thei
 `/infrastructure` keeps infrastructure outputs and accountability evidence separate. Roads include annual construction, capital expenditure, an NHAI debt snapshot, maintenance expenditure, fee-plaza coverage and dated ETC collection. Railways include route kilometres, passengers, freight, track renewal and the narrowly defined consequential-accident series. Aviation includes scheduled domestic passengers and dated UDAN coverage/funding.
 
 The audit ledger uses bounded CAG records. It does not call tolling itself a “scam” or generalise a sampled finding to all plazas. A future plaza-level record must connect the rate notification, concession agreement, completion status, applicable length, collection/remittance, maintenance duty, complaint resolution and authoritative audit/court outcome. State roads, buses, metro, ports, logistics, land/environment, contracts and public-experience measures remain explicit next-layer tables.
+
+## Toll and project registry in v1.0
+
+`/infrastructure/registry` is a manually verified seed explorer, not a bulk mirror of NHTIS. Its eight plaza records cover eight states and show the cited fee schedule, applicable length, capital cost, cumulative revenue, concession and traffic fields only when the official plaza page publishes them. The interface compares that sample with MoRTH's reported 1,051 NH fee plazas with ETC as of 31 December 2024, making the 0.8% coverage gap prominent.
+
+The project register contains eight source-linked road, rail and aviation records. A commercial-operation date, inauguration, route award or technical milestone is not relabelled as complete delivery. Missing cost, deadline, contractor and current-service fields remain `Data gap`. CSV downloads preserve nulls as `Data gap` and the interface provides no toll, fraud, safety or government-performance ranking.
 
 Never place either credential in browser code. Add them as server-side environment variables after access is approved.
 

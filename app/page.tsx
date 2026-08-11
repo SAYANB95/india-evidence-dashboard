@@ -212,7 +212,7 @@ const stateOutputNsdp: Record<string, StateOutputRecord> = {
 const dataMenu = [
   { title: "Economy & budgets", links: [["GDP and state output", "#economy"], ["Per-capita NSDP", "#economy"], ["Debt and reported assets", "#economy"], ["Wealth distribution", "#economy"], ["Budget bifurcation", "#evidence"]] },
   { title: "People & services", links: [["Birth rate", "#jurisdictions"], ["Sex ratio at birth", "#jurisdictions"], ["Schools and students", "#jurisdictions"], ["Hospitals and beds", "#jurisdictions"], ["Ambulances", "#jurisdictions"]] },
-  { title: "Safety & infrastructure", links: [["Transport evidence room", "/infrastructure"], ["NHAI, roads and tolls", "/infrastructure#roads"], ["Railways", "/infrastructure#rail"], ["Airways and airports", "/infrastructure#air"], ["Registered crime", "#jurisdictions"], ["Road condition reports", "#road-report"]] },
+  { title: "Safety & infrastructure", links: [["Toll and project registry", "/infrastructure/registry"], ["Transport evidence room", "/infrastructure"], ["NHAI, roads and tolls", "/infrastructure#roads"], ["Railways and aviation", "/infrastructure#rail"], ["Registered crime", "#jurisdictions"], ["Road condition reports", "#road-report"]] },
   { title: "Accountability", links: [["Promises tracker", "#evidence"], ["1947–present timeline", "#timeline"], ["Schemes", "#modules"], ["All states and UTs", "#jurisdictions"], ["Methodology and gaps", "#methodology"]] },
 ] as const;
 
