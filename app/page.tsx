@@ -671,6 +671,8 @@ export default function Home() {
           </div>
         </div>
 
+        <a className="freshness-method-link" href="#data-freshness">Data freshness &amp; sources <span>↓</span></a>
+
         <div className="live-dashboard">
           <div className="live-primary">
             <div className="live-source-line">
@@ -704,17 +706,6 @@ export default function Home() {
             )}
           </div>
 
-          <aside className="connector-panel">
-            <p className="connector-kicker">Data connection ledger</p>
-            <h3>Live does not mean<br />the same thing everywhere.</h3>
-            <div className="connector-list">
-              <div><span className="connector-status connected">Running</span><p><strong>Open-Meteo current conditions</strong><small>Public model-data API · automatic</small></p></div>
-              <div><span className={`connector-status ${liveAir ? "connected" : "editorial"}`}>{liveAir ? "Running" : "Credential-ready"}</span><p><strong>CPCB air quality</strong><small>Official hourly feed · server-side data.gov.in key required</small></p></div>
-              <div><span className="connector-status key">Restricted</span><p><strong>IMD warnings</strong><small>Government-email registration required · not connected</small></p></div>
-              <div><span className="connector-status editorial">Release cycle</span><p><strong>Budgets, audits, forests</strong><small>Updated only when source publications change</small></p></div>
-            </div>
-            <p className="connector-note">Weather is a public model-data demo. CPCB values are official station records. Neither is a government-performance score or emergency-warning service.</p>
-          </aside>
         </div>
 
         <section className="air-quality-card" aria-labelledby="air-quality-title">
@@ -1101,6 +1092,14 @@ export default function Home() {
             <li><span>03</span><div><strong>Reconcile time and definition</strong><p>Compare like periods and definitions. Preserve BE, RE and actuals as separate values.</p></div></li>
             <li><span>04</span><div><strong>Publish uncertainty</strong><p>Use disputed or insufficient evidence when sources conflict or the chain cannot be completed.</p></div></li>
           </ol>
+          <div className="data-freshness-method" id="data-freshness">
+            <p>Data freshness &amp; sources</p>
+            <div className="data-freshness-grid">
+              <div><span className="connector-status connected">Running</span><strong>Open-Meteo current conditions</strong><small>Public model-data API · observation and retrieval times shown with each reading.</small></div>
+              <div><span className={`connector-status ${liveAir ? "connected" : "editorial"}`}>{liveAir ? "Running" : "Unavailable"}</span><strong>CPCB air quality</strong><small>Official station records through data.gov.in · not a statewide average.</small></div>
+              <div><span className="connector-status editorial">Periodic</span><strong>Budgets, audits and forests</strong><small>Updated when the responsible public authority releases a new publication.</small></div>
+            </div>
+          </div>
           <div className="status-key">
             <p>Allowed promise statuses</p>
             <div><span className="status-badge delivered">Delivered</span><span className="status-badge partial">Partial</span><span className="status-badge ongoing">Ongoing</span><span className="status-badge delayed">Delayed</span><span className="status-badge disputed">Disputed</span><span className="status-badge unknown">Insufficient evidence</span></div>
