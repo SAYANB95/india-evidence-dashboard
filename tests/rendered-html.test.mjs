@@ -10,6 +10,10 @@ async function renderState(slug) {
   return readFile(new URL(`../.next/server/app/state/${slug}.html`, import.meta.url), "utf8");
 }
 
+async function renderInfrastructure() {
+  return readFile(new URL("../.next/server/app/infrastructure.html", import.meta.url), "utf8");
+}
+
 test("server-renders the India Evidence Dashboard", async () => {
   const html = await render();
   assert.match(html, /<title>India Evidence Dashboard/);
@@ -35,4 +39,15 @@ test("pre-renders a source-labelled state evidence record", async () => {
   assert.match(html, /What is loaded/);
   assert.match(html, /Data gap|data gap/);
   assert.match(html, /Download CSV/);
+});
+
+test("pre-renders transport finance, service and audit evidence", async () => {
+  const html = await renderInfrastructure();
+  assert.match(html, /Built, financed, charged/);
+  assert.match(html, /NHAI outstanding debt/);
+  assert.match(html, /What a toll-plaza record must prove/);
+  assert.match(html, /Consequential train accidents/);
+  assert.match(html, /UDAN viability funding/);
+  assert.match(html, /Findings, not slogans/);
+  assert.match(html, /State roads &amp; bridges/);
 });

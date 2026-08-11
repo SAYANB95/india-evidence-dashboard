@@ -97,6 +97,15 @@ The production road workflow must:
 - Source-mapped periodic records for budget, inflation, education, vital statistics, health, environment, schemes and promises; missing values remain visible gaps.
 - Production build, lint, rendered HTML checks and browser verification across state selection, directory search and comparison.
 
+## Transport foundation through v0.9
+
+- National road evidence separates construction, capital expenditure, maintenance, NHAI debt, toll-plaza coverage and electronic collection.
+- Toll accountability uses a proof chain covering notification, concession, completion, length, collection/remittance, maintenance, complaints and authoritative findings.
+- Rail evidence separates network size, passenger journeys, freight, track renewal and consequential accidents.
+- Aviation evidence separates passenger traffic, airports, awarded/operating routes and viability funding.
+- A bounded CAG ledger records specific road/toll, Bharatmala, railway-track, UDAN and airport-PPP audits without generalising findings beyond the audited scope.
+- Missing state roads, bridges, buses, metros, ports, freight/logistics, safety, land/environment, contract and passenger-experience layers are visible implementation records.
+
 ## Seed sources through v0.8
 
 - Government of India, Budget at a Glance 2025–26.

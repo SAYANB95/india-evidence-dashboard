@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 0.8 adds a real multi-route evidence platform: a searchable national directory, 36 shareable state/UT records, transparent metric comparison, topic coverage ledgers and CSV export. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 0.9 adds a real multi-route evidence platform with a dedicated Transport & Infrastructure evidence room: roads, NHAI finance, tolls, railways, aviation, audits and the missing public-accountability layers. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -11,6 +11,7 @@ This repository is a public-safe website foundation. Version 0.8 adds a real mul
 - `/explore`, a searchable/filterable national evidence directory;
 - `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;
 - downloadable CSV manifests containing period, status, definition, limitation and source;
+- `/infrastructure`, separating highway construction, maintenance, NHAI debt, toll collection, railway network/traffic/safety, aviation coverage and bounded audit findings;
 - an `All data` directory with economy, people/services, safety/infrastructure and accountability subtopics;
 - a selected-jurisdiction total-output card using the latest available official NSDP value for 33 jurisdictions, with three explicit gaps;
 - an economy-first screen with MoSPI national GDP and GDP per capita, RBI per-capita NSDP for 33 of 36 current jurisdictions, a defined Central Government liabilities-to-reported-assets comparison, and a clearly labelled research estimate of wealth distribution;
@@ -86,6 +87,12 @@ Every current state and union territory has a statically generated public record
 `/explore` searches all 36 records and filters by jurisdiction type or evidence topic. `/compare` places only defined compatible metrics side by side and keeps differing years visible. `/api/evidence/export` produces a CSV evidence manifest; a blank value remains blank and is never silently converted to zero.
 
 UDISE+, SRS, CPI and health-infrastructure records are explicitly periodic. Their source-mapped cards do not claim live integration, and state numeric values are not shown until an attributable official table can be ingested and checked. The current downloadable CSV is an evidence manifest, not a claim of complete data coverage.
+
+## Transport evidence in v0.9
+
+`/infrastructure` keeps infrastructure outputs and accountability evidence separate. Roads include annual construction, capital expenditure, an NHAI debt snapshot, maintenance expenditure, fee-plaza coverage and dated ETC collection. Railways include route kilometres, passengers, freight, track renewal and the narrowly defined consequential-accident series. Aviation includes scheduled domestic passengers and dated UDAN coverage/funding.
+
+The audit ledger uses bounded CAG records. It does not call tolling itself a “scam” or generalise a sampled finding to all plazas. A future plaza-level record must connect the rate notification, concession agreement, completion status, applicable length, collection/remittance, maintenance duty, complaint resolution and authoritative audit/court outcome. State roads, buses, metro, ports, logistics, land/environment, contracts and public-experience measures remain explicit next-layer tables.
 
 Never place either credential in browser code. Add them as server-side environment variables after access is approved.
 

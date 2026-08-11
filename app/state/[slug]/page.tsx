@@ -22,7 +22,7 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
   return <main className="record-shell">
     <header className="record-header">
       <a className="record-brand" href="/"><span className="brand-mark" aria-hidden="true"/><b>India Evidence <em>Dashboard</em></b></a>
-      <nav aria-label="State report navigation"><a href="#economy">Economy</a><a href="#safety">Safety</a><a href="#services">Services</a><a href="#sources">Sources</a><a href="/explore">All evidence</a></nav>
+      <nav aria-label="State report navigation"><a href="#economy">Economy</a><a href="#safety">Safety</a><a href="#services">Services</a><a href="/infrastructure">Transport</a><a href="#sources">Sources</a></nav>
       <a className="record-compare" href={`/compare?left=${item.slug}`}>Compare</a>
     </header>
 
