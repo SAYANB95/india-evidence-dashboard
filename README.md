@@ -2,11 +2,15 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 0.7 opens with the India civic-evidence landing screen, places a state-aware economic evidence screen directly below it, includes a full topic/subtopic menu, and provides credential-ready data.gov.in evidence routes. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 0.8 adds a real multi-route evidence platform: a searchable national directory, 36 shareable state/UT records, transparent metric comparison, topic coverage ledgers and CSV export. It is **not** a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
 - all 36 jurisdictions in the navigation and data model;
+- a dedicated, shareable `/state/[jurisdiction]` page for every state and union territory;
+- `/explore`, a searchable/filterable national evidence directory;
+- `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;
+- downloadable CSV manifests containing period, status, definition, limitation and source;
 - an `All data` directory with economy, people/services, safety/infrastructure and accountability subtopics;
 - a selected-jurisdiction total-output card using the latest available official NSDP value for 33 jurisdictions, with three explicit gaps;
 - an economy-first screen with MoSPI national GDP and GDP per capita, RBI per-capita NSDP for 33 of 36 current jurisdictions, a defined Central Government liabilities-to-reported-assets comparison, and a clearly labelled research estimate of wealth distribution;
@@ -49,7 +53,7 @@ This repository is a public-safe website foundation. Version 0.7 opens with the 
 
 Every figure in the interface states its source period and limitation. Links to live official dashboards are reference doorways only; the prototype does not claim to mirror or integrate them.
 
-## Economic evidence in v0.7
+## Economic evidence in v0.8
 
 The first screen is the civic-evidence landing view; the economic section follows immediately below. India’s view reports FY 2025–26 provisional nominal GDP and GDP per capita from MoSPI. When a state or union territory is selected, both blue total-output and per-person cards change to that jurisdiction. The total card uses **Net State Domestic Product at current prices** from the Economic Survey table; the per-person card uses **per-capita NSDP at current prices** from RBI Table 9. Neither is a live income counter or household income. Coverage is 33 published values and three explicit gaps for Dadra & Nagar Haveli and Daman & Diu, Ladakh, and Lakshadweep. Source years differ, so the order is exploratory rather than a strict same-year ranking.
 
@@ -57,7 +61,7 @@ The displayed 2.23× comparison divides the Union Government’s budgeted 2025�
 
 The wealth-share panel uses World Inequality Lab’s 2022–23 research estimate: bottom 50% 6.4%, middle 40% 28.6%, and top 10% 65.0%; the top 1% share of 40.1% is included within the top 10%. The interface identifies this as non-government research and links to its methods. UDISE+, SRS, RBI and health-infrastructure publications remain periodic evidence and are never labelled live.
 
-## Running data in v0.7
+## Running data in v0.8
 
 `/api/live/weather` retrieves current conditions from [Open-Meteo](https://open-meteo.com/en/docs) for the reference coordinates associated with the selected jurisdiction. The browser refreshes the panel when the jurisdiction changes and every ten minutes while it remains open. Responses identify the observation time and retrieval time; failures produce an unavailable state instead of displaying a cached number as live.
 
@@ -67,13 +71,21 @@ Open-Meteo combines public weather-model output from multiple national providers
 
 The IMD connector remains unavailable. The public registration portal requires an eligible government email address, so the prototype does not claim direct IMD API access. Weather warnings must remain disconnected unless legitimate access is later approved.
 
-## Annual state evidence in v0.7
+## Annual state evidence in v0.8
 
 `/api/evidence/state` retrieves the selected jurisdiction’s official annual series, and `/api/evidence/all-states` returns one normalized row for every current state and union territory. Selecting Maharashtra, for example, changes the overview itself to Maharashtra evidence; Union-level cards appear only in the India national view. The all-state table remains separate so the public can inspect all 36 jurisdictions without changing the selected report.
 
 Both panels distinguish reporting year from retrieval time. Registered crime is not the same as underlying prevalence, and NCRB cautions against comparing States/UTs purely on crime counts. Sorting is an exploration control, not a performance or safety ranking. The displayed accidents-per-day value is the 2023 annual total divided by 365; it is not a live incident counter. Ladakh’s separate 2019 IPC field remains a visible data gap because that series predates the current reporting split.
 
 The dashboard does not invent a “foetus killing rate.” It maps that request to separately defined evidence: sex ratio at birth, registered PCPNDT enforcement cases where available, and official vital-statistics limitations. Hospital-bed and ambulance cards are also not marked live because there is no verified national real-time availability feed connected to this prototype.
+
+## Evidence platform routes in v0.8
+
+Every current state and union territory has a statically generated public record, for example `/state/maharashtra`. The jurisdiction selector changes the entire record and URL. Each page combines the source-backed NSDP measures already in the project with the credential-backed annual crime and road-safety connector, then exposes consistent topic records for budgets, inflation, schools, vital statistics, health infrastructure, environment, schemes and promises.
+
+`/explore` searches all 36 records and filters by jurisdiction type or evidence topic. `/compare` places only defined compatible metrics side by side and keeps differing years visible. `/api/evidence/export` produces a CSV evidence manifest; a blank value remains blank and is never silently converted to zero.
+
+UDISE+, SRS, CPI and health-infrastructure records are explicitly periodic. Their source-mapped cards do not claim live integration, and state numeric values are not shown until an attributable official table can be ingested and checked. The current downloadable CSV is an evidence manifest, not a claim of complete data coverage.
 
 Never place either credential in browser code. Add them as server-side environment variables after access is approved.
 

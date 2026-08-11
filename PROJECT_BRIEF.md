@@ -88,7 +88,16 @@ The production road workflow must:
 - log moderator actions and evidence changes;
 - clearly distinguish citizen observation from authority acknowledgement and independent verification.
 
-## Seed sources through v0.7
+## Implemented foundation through v0.8
+
+- 36 stable jurisdiction records with human-readable URLs and state/UT identity.
+- A normalized evidence catalog that keeps status, period, definition, limitation and source together.
+- Dedicated state pages using the existing verified NSDP series and official data.gov.in annual crime/road connector.
+- Search/filter directory, compatible-metric comparison and downloadable CSV evidence manifests.
+- Source-mapped periodic records for budget, inflation, education, vital statistics, health, environment, schemes and promises; missing values remain visible gaps.
+- Production build, lint, rendered HTML checks and browser verification across state selection, directory search and comparison.
+
+## Seed sources through v0.8
 
 - Government of India, Budget at a Glance 2025–26.
 - Forest Survey of India / MoEFCC, India State of Forest Report 2023 release.
@@ -101,11 +110,11 @@ The production road workflow must:
 
 No other interface card should display an apparently complete numeric result until its source record is added and reviewed.
 
-## Next implementation steps
+## Remaining production steps
 
-1. Define JSON/SQL schemas for sources, measures, promises, evidence observations, jurisdictions and revision history.
+1. Convert the normalized application model into persistent SQL tables for sources, measures, promises, observations and revision history.
 2. Establish an editorial source archive and two-person review for status changes.
-3. Deepen the all-36 foundation topic by topic while preserving visible per-series coverage gaps and boundary caveats.
+3. Ingest and review state tables topic by topic, beginning with same-year education, health, CPI and audited public-finance series.
 4. Add state budget and audit-source mapping without promising real-time refresh.
 5. Build the secure citizen-report backend only after privacy, moderation and authority-routing decisions are approved.
 6. Add automated accessibility, broken-link and source-freshness checks.

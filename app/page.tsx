@@ -253,6 +253,10 @@ function weatherLabel(code: number) {
   return "Thunderstorm";
 }
 
+function jurisdictionSlug(name: string) {
+  return name.toLowerCase().replace(/&/g, "and").replace(/\(nct\)/g, "nct").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 function mapMarkerPosition(name: string) {
   const location = jurisdictionLocations[name];
   if (!location) return { left: "50%", top: "50%" };
@@ -535,6 +539,7 @@ export default function Home() {
           <a href="#economy">Economy</a>
           <a href="#live-data">Live data</a>
           <a href="#jurisdictions">States & UTs</a>
+          <a href="/explore">Evidence directory</a>
           <a href="#methodology">Methodology</a>
         </nav>
         <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="data-menu" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? "Close" : "All data"}<span aria-hidden="true">{menuOpen ? "×" : "+"}</span></button>
@@ -577,7 +582,7 @@ export default function Home() {
             <option>India — national view</option>
             <optgroup label="28 states">{states.map((state) => <option key={state}>{state}</option>)}</optgroup>
             <optgroup label="8 union territories">{unionTerritories.map((territory) => <option key={territory}>{territory}</option>)}</optgroup>
-          </select></label>
+          </select>{!jurisdiction.startsWith("India") && <a href={`/state/${jurisdictionSlug(jurisdiction)}`}>Open full {jurisdiction} record →</a>}</label>
         </div>
 
         <div className="economic-grid">
@@ -925,6 +930,7 @@ export default function Home() {
               <span className="selected-type">{jurisdiction.startsWith("India") ? "National overview" : unionTerritories.includes(jurisdiction) ? "Union territory" : "State"}</span>
               <h3>{jurisdiction}</h3>
               <p>{jurisdiction.startsWith("India") ? "Three verified national snapshots are available in this prototype." : annualEvidence ? `Official crime and road-safety evidence is loaded for ${jurisdiction}. Topic coverage and source limitations are shown below.` : `The ${jurisdiction} record is loading its available official evidence.`}</p>
+              {!jurisdiction.startsWith("India") && <a className="state-record-link" href={`/state/${jurisdictionSlug(jurisdiction)}`}>Open complete {jurisdiction} record →</a>}
             </div>
             <div className="state-topic-cards">
               <article><span>Budget & public finance</span><strong>{jurisdiction.startsWith("India") ? "Union seed loaded" : "Official source mapped"}</strong><p>{jurisdiction.startsWith("India") ? "BE 2025–26 card available above." : "State BE, RE and audited actuals are not yet ingested; the source doorway is ready."}</p><ExternalLink href="https://cag.gov.in/en/state-accounts-report">CAG state accounts</ExternalLink></article>
