@@ -211,7 +211,7 @@ const stateOutputNsdp: Record<string, StateOutputRecord> = {
 
 const dataMenu = [
   { title: "Economy & budgets", links: [["GDP and state output", "#economy"], ["Per-capita NSDP", "#economy"], ["Debt and reported assets", "#economy"], ["Wealth distribution", "#economy"], ["Budget bifurcation", "#evidence"]] },
-  { title: "People & services", links: [["Loans and scheme finder", "/schemes"], ["Birth rate", "#jurisdictions"], ["Sex ratio at birth", "#jurisdictions"], ["Schools and students", "#jurisdictions"], ["Hospitals and beds", "#jurisdictions"], ["Ambulances", "#jurisdictions"]] },
+  { title: "People & services", links: [["All-State evidence packs", "/state-packs"], ["Loans and scheme finder", "/schemes"], ["Birth and death rates", "/state-packs"], ["Infant mortality", "/state-packs"], ["Schools, students and teachers", "/state-packs"], ["Hospitals and beds", "#jurisdictions"], ["Ambulances", "#jurisdictions"]] },
   { title: "Safety & infrastructure", links: [["Toll and project registry", "/infrastructure/registry"], ["Transport evidence room", "/infrastructure"], ["NHAI, roads and tolls", "/infrastructure#roads"], ["Railways and aviation", "/infrastructure#rail"], ["Registered crime", "#jurisdictions"], ["Road condition reports", "#road-report"]] },
   { title: "Accountability & history", links: [["Freedom movement archive", "/history"], ["Complete evidence catalogue", "/catalog"], ["Promises tracker", "#evidence"], ["1947–present timeline", "#timeline"], ["Public operations", "/operations"], ["Request a correction", "/corrections"], ["Methodology and gaps", "#methodology"]] },
 ] as const;
@@ -539,6 +539,7 @@ export default function Home() {
           <a href="#economy">Economy</a>
           <a href="#live-data">Live data</a>
           <a href="#jurisdictions">States & UTs</a>
+          <a href="/state-packs">State packs</a>
           <a href="/schemes">Schemes & loans</a>
           <a href="/infrastructure">Transport</a>
           <a href="/history">History</a>
@@ -1125,7 +1126,7 @@ export default function Home() {
       <footer>
         <div className="brand footer-brand"><span className="brand-mark" aria-hidden="true"><b /><b /><b /></span><span>India Evidence <em>Dashboard</em></span></div>
         <p>Independent prototype for verifiable public information. No party affiliation or official endorsement. The CPCB connector requires a server-side data.gov.in key.</p>
-        <div><a href="/catalog">All evidence domains</a><a href="/operations">Operations</a><a href="/corrections">Corrections</a><a href="#top">Back to top ↑</a></div>
+        <div><a href="/state-packs">All-State packs</a><a href="/catalog">All evidence domains</a><a href="/operations">Operations</a><a href="/corrections">Corrections</a><a href="#top">Back to top ↑</a></div>
       </footer>
 
       {reportOpen && (

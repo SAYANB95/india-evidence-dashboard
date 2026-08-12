@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.7 connects a production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, a second-person publication gate, a complete 46-domain evidence catalogue, public operations transparency, privacy-minimised stored correction requests, and a source-linked freedom-movement and contested-history archive. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.8 adds reviewed UDISE+ 2023-24 education and SRS 2023 vital-statistics packs for all 36 jurisdictions, an all-state comparison/export route, and a searchable, source-linked freedom-movement people and primary-document library. It also retains the production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, second-person publication gate, complete 46-domain evidence catalogue, public operations transparency, and privacy-minimised correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -12,6 +12,8 @@ This repository is a public-safe website foundation. Version 1.7 connects a prod
 - `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;
 - `/catalog`, a searchable implementation ledger defining all 46 in-scope economy, finance, people, education, health, services, safety, justice, infrastructure, agriculture, environment, governance and historical evidence domains;
 - `/history`, a document-first archive with initial dossiers on district freedom fighters, Subhas Chandra Bose and the INA, Savarkar's clemency petitions, and controversies concerning Syama Prasad Mookerjee;
+- `/state-packs`, a searchable and sortable all-36 table of official UDISE+ school, enrolment and teacher counts plus SRS birth, death and infant-mortality estimates, with CSV export and source-period warnings;
+- a searchable reviewed history seed containing 12 freedom-movement people from multiple regions and five primary-document doorways; this is a starting register, not a complete national list;
 - the same 46-domain ledger on every state and UT page, so no jurisdiction silently loses a category when its numeric evidence is missing;
 - `/operations`, a public-safe register of stored coverage, source health, running connectors, periodic releases and held production gates;
 - `/corrections`, a stored public correction pathway that collects no name, email, phone, image or location and never changes published evidence automatically;
@@ -39,13 +41,19 @@ This repository is a public-safe website foundation. Version 1.7 connects a prod
 
 ## Scope completion in v1.6
 
-The product taxonomy is now complete for the agreed civic-evidence scope: 46 domains are defined, grouped, source-mapped, assigned a refresh pattern and displayed uniformly for all 36 jurisdictions. Eleven domains have loaded or connected evidence; every other source doorway, editorial queue and explicit data gap remains visible. These coverage labels describe this dashboard, not the importance or performance of a state or government.
+The product taxonomy is complete for the agreed civic-evidence scope: 46 domains are defined, grouped, source-mapped, assigned a refresh pattern and displayed uniformly for all 36 jurisdictions. Thirteen domains now have loaded or connected evidence; every other source doorway, editorial queue and explicit data gap remains visible. These coverage labels describe this dashboard, not the importance or performance of a state or government.
 
 ## Freedom movement and contested history in v1.7
 
 `/history` begins a document-first historical layer. Its four seed dossiers separate verified starting points, contested interpretations, missing records and primary public doorways. A 25-part ingestion register covers regional and Adivasi resistance, 1857, revolutionary and mass movements, prison records, Quit India, Netaji and the INA, Partition, constitutional debates, political collaboration controversies, wars, assassinations and inquiries, Emergency, violence commissions, citizenship, declassified records and public-memory disputes. Charged words such as “betrayal” or “traitor” may appear only as dated, attributed claims—not as dashboard verdicts.
 
 Category completion is not data fabrication. A domain can be fully represented in the product model while its observations remain unfilled until a compatible official release is ingested and reviewed. Future work is therefore data expansion, source maintenance and editorial operation—not discovery of another missing top-level category.
+
+## All-state periodic evidence in v1.8
+
+Every state and union-territory record now includes the same reviewed UDISE+ 2023-24 measures: schools, enrolments, teachers, pupil-teacher ratio, zero-enrolment schools and single-teacher schools. It also includes SRS 2023 birth and death rates and infant-mortality estimates; for smaller jurisdictions, the source's 2021-23 pooled IMR period remains visible. `/state-packs` compares and exports these 36 records. Sort order is exploratory, not a ranking, and administrative school counts do not measure learning quality.
+
+`/history` now adds a searchable 12-person reviewed seed and five document records beneath the archive's methodology. Present-day state filters are discovery aids, not claims about historical borders or exclusive ownership. A complete district-level freedom-movement register remains future editorial work and is not implied by these seeds.
 
 The correction API requires same-origin JSON, a bounded body, a server-only HMAC salt, persistent anonymous rate limits, an evidence-only attestation and an optional credential-free HTTPS source. It stores a random receipt and the correction text, not raw IP addresses or contact information.
 

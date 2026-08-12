@@ -66,6 +66,20 @@ test("pre-renders a source-labelled state evidence record", async () => {
   assert.match(html, /Download CSV/);
   assert.match(html, /Complete coverage ledger/);
   assert.match(html, /Courts, pendency and legal services/);
+  assert.match(html, /Schools and vital statistics/);
+  assert.match(html, /1,08,237/);
+  assert.match(html, /Infant mortality rate/);
+});
+
+test("pre-renders a comparable all-state education and vital-statistics table",async()=>{
+  const html=await renderStaticPage("state-packs");
+  assert.match(html,/No hidden states/);
+  assert.match(html,/36 jurisdictions/);
+  assert.match(html,/UDISE\+ 2023-24/);
+  assert.match(html,/SRS Bulletin 2023/);
+  assert.match(html,/Maharashtra/);
+  assert.match(html,/Ladakh/);
+  assert.match(html,/not a government, school-system or health-performance rank/i);
 });
 
 test("pre-renders the complete evidence catalogue and privacy correction pathway",async()=>{
@@ -91,6 +105,13 @@ test("pre-renders a document-first freedom movement and contested-history archiv
   assert.match(history,/We can document betrayal claims/);
   assert.match(history,/Digital District Repository/);
   assert.match(history,/National Archives of India/);
+  assert.match(history,/People beyond/);
+  assert.match(history,/the usual shortlist/);
+  assert.match(history,/Velu Nachiyar/);
+  assert.match(history,/U Tirot Sing/);
+  assert.match(history,/What the document proves/);
+  assert.match(history,/What it does not/);
+  assert.match(history,/Does not establish/);
   assert.match(catalog,/Freedom movement people, documents and disputes/);
 });
 
