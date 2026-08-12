@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
@@ -20,6 +20,10 @@ async function renderInfrastructureRegistry() {
 
 async function renderEditorial() {
   return readFile(new URL("../.next/server/app/editorial.html", import.meta.url), "utf8");
+}
+
+async function renderSchemes() {
+  return readFile(new URL("../.next/server/app/schemes.html", import.meta.url), "utf8");
 }
 
 async function readJson(path) {
@@ -99,6 +103,19 @@ test("pre-renders a safe read-only editorial evidence console", async () => {
   assert.doesNotMatch(html, /Save changes|Publish now|Delete record/i);
 });
 
+test("pre-renders the privacy-safe loans and schemes navigator", async () => {
+  const html = await renderSchemes();
+  assert.match(html, /Find the doorway/);
+  assert.match(html, /MUDRA \/ PMMY/);
+  assert.match(html, /West Bengal/);
+  assert.match(html, /No Aadhaar/);
+  assert.match(html, /not an eligibility decision/i);
+  assert.match(html, /Legacy \/ successor pending/);
+  assert.match(html, /no private middleman is authorized/i);
+  assert.match(html, /State catalogues next/);
+  assert.doesNotMatch(html, /guaranteed approval|instant sanction/i);
+});
+
 test("database migration preserves evidence, source, review and revision entities", async () => {
   const sql = await readFile(new URL("../drizzle/0000_silent_sheva_callister.sql", import.meta.url), "utf8");
   for (const table of ["jurisdictions", "sources", "evidence_records", "observations", "promises", "revisions", "reviews", "corrections"]) {
@@ -106,4 +123,14 @@ test("database migration preserves evidence, source, review and revision entitie
   }
   assert.match(sql, /record_revision_unique/);
   assert.match(sql, /source_url_unique/);
+});
+
+test("database migrations include schemes, jurisdiction coverage and application rules", async () => {
+  const directory = new URL("../drizzle/", import.meta.url);
+  const migrations = (await readdir(directory)).filter((name) => name.endsWith(".sql"));
+  const sql = (await Promise.all(migrations.map((name) => readFile(new URL(name, directory), "utf8")))).join("\n");
+  for (const table of ["schemes", "scheme_jurisdictions", "eligibility_rules", "application_channels"]) {
+    assert.ok(sql.includes(`CREATE TABLE \`${table}\``), `migration must create ${table}`);
+  }
+  assert.match(sql, /scheme_jurisdiction_unique/);
 });

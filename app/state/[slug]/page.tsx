@@ -22,7 +22,7 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
   return <main className="record-shell">
     <header className="record-header">
       <a className="record-brand" href="/"><span className="brand-mark" aria-hidden="true"/><b>India Evidence <em>Dashboard</em></b></a>
-      <nav aria-label="State report navigation"><a href="#economy">Economy</a><a href="#safety">Safety</a><a href="#services">Services</a><a href="/infrastructure">Transport</a><a href="#sources">Sources</a></nav>
+      <nav aria-label="State report navigation"><a href="#economy">Economy</a><a href="#safety">Safety</a><a href="#services">Services</a><a href="/schemes">Schemes & loans</a><a href="/infrastructure">Transport</a><a href="#sources">Sources</a></nav>
       <a className="record-compare" href={`/compare?left=${item.slug}`}>Compare</a>
     </header>
 
@@ -48,6 +48,6 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
 
     <section className="record-section source-manifest" id="sources"><p className="eyebrow">Evidence standard</p><h2>Every number must travel with its proof.</h2><div><p><b>Metric</b><br/>What exactly is being counted.</p><p><b>Period</b><br/>Observation year and retrieval time.</p><p><b>Geography</b><br/>The jurisdiction or station represented.</p><p><b>Source</b><br/>A public primary doorway.</p><p><b>Limitation</b><br/>What the figure cannot prove.</p></div></section>
 
-    <footer className="record-footer"><a href="/">← National dashboard</a><a href="/explore">Browse all 36 jurisdictions</a><a href="/#methodology">Methodology</a></footer>
+    <footer className="record-footer"><a href="/">← National dashboard</a><a href="/schemes">Find loans & schemes</a><a href="/explore">Browse all 36 jurisdictions</a><a href="/#methodology">Methodology</a></footer>
   </main>;
 }

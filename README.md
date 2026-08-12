@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.1 adds a normalized evidence schema and a read-only editorial migration console to the existing multi-route public platform. It is **not** a connected production database, a complete historical database, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.2 adds a source-reviewed loans and schemes navigator, jurisdiction-aware discovery and a normalized scheme data model to the existing evidence platform. It is **not** a connected production database, a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -111,6 +111,16 @@ The Drizzle/SQLite schema defines jurisdictions, sources, evidence records, obse
 Connecting a database, authentication, source archive and write-capable editorial actions remains a separate production step. Do not make the console writable on the public route without role-based access, server-side validation, revision logging and a second-person publication gate.
 
 Never place either credential in browser code. Add them as server-side environment variables after access is approved.
+
+## Loans and schemes navigator in v1.2
+
+`/schemes` provides a privacy-safe discovery flow across all 36 states and union territories. The first reviewed catalogue contains eight national credit or support routes: MUDRA/PMMY, PMEGP, Agriculture Infrastructure Fund, PM-Vidyalaxmi, DAY-NRLM credit linkage, CGTMSE, PMJDY overdraft and the legacy Stand-Up India record. Each card separates the published support structure, likely users, interest treatment, collateral or guarantee position, documents, access steps, official source and limitation.
+
+Matching uses only broad selections in the browser. It collects no Aadhaar number, bank details, phone number or application data, and a possible match is never presented as eligibility, approval or sanction. Loans, subsidies, interest support, overdrafts and credit guarantees remain distinct. PMEGP retains the official warning against private middlemen, and CGTMSE is correctly described as lender-mediated guarantee support rather than a direct borrower loan.
+
+The state selector means that the reviewed national routes are available for discovery from that jurisdiction; it does not claim that every state-government programme has been loaded. State corporation, department and local implementing-agency catalogues remain an explicit data gap, with the official [myScheme](https://www.myscheme.gov.in/) State/UT finder provided as the current public doorway. Stand-Up India is retained as a clearly labelled legacy record because its official page says that version ran through 31 March 2025 and a successor was under preparation; the dashboard provides no stale application button.
+
+The schema now also defines `schemes`, `scheme_jurisdictions`, `eligibility_rules` and `application_channels`. `/api/schemes/export` provides the reviewed seed as CSV. PM SVANidhi and individual state programmes require a fresh official source and status review before inclusion; absence from this small catalogue does not mean absence of support.
 
 ## Visual system
 

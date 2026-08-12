@@ -13,7 +13,7 @@ Build a public, politically neutral, source-linked dashboard that covers every I
 
 ## Current release boundary
 
-Version 1.1 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, a manually verified toll-plaza/project seed registry, and a read-only editorial migration console. A normalized database schema exists, but no persistent provider, authentication, upload storage or moderation backend is connected. It must not be described as a complete tracker.
+Version 1.2 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, a manually verified toll-plaza/project seed registry, a read-only editorial migration console, and a privacy-safe loans and schemes navigator. A normalized database schema exists, but no persistent provider, authentication, upload storage or moderation backend is connected. It must not be described as a complete tracker or complete scheme directory.
 
 The economic screen uses MoSPI provisional FY 2025–26 national accounts, the Economic Survey state NSDP table for total jurisdiction output, and RBI Handbook Table 9 for per-capita NSDP at current prices. Selecting a state/UT must update both total and per-capita cards; India values must never remain visible as if they belong to the selected state. Both all-jurisdiction series have 33 published values and three explicit gaps; mixed source years must remain visible and must not be presented as a strict same-year ranking. NSDP is not GSDP or household income. The 2.23× liabilities/assets figure compares ₹196.78 lakh crore of budgeted Central Government liabilities with ₹88.28 lakh crore of reported assets defined as cumulative capital outlay plus loans advanced. It is not a valuation of India’s total national or household wealth. Wealth-group shares are World Inequality Lab research estimates for 2022–23, not an official Government of India series; the top 1% is a subset of the top 10% and must not be added to it.
 
@@ -123,6 +123,17 @@ The production road workflow must:
 - The 16 existing transport records are mapped into a filterable migration queue with explicit missing fields and database-readiness states.
 - The editorial route is read-only and non-indexed. It must remain non-writable until a persistent provider, authentication, role permissions, server validation and second-person publication approval are implemented.
 
+## Loans and schemes foundation in v1.2
+
+- `/schemes` covers all 36 jurisdictions in navigation and shows eight source-reviewed national credit/support records.
+- MUDRA/PMMY, PMEGP, AIF, PM-Vidyalaxmi, DAY-NRLM, CGTMSE and PMJDY overdraft retain their distinct support type, responsible route, conditions, documents, source date and non-guarantee limitation.
+- Stand-Up India is marked `Legacy / successor pending`; the dashboard does not expose a stale application action after the cited scheme period ended on 31 March 2025.
+- The browser-only matcher uses broad profile, need and area fields and stores no applicant identity, Aadhaar, bank, phone or financial details.
+- A possible match is not an eligibility determination, credit appraisal, approval, subsidy reservation or sanction.
+- State selection proves only that reviewed national schemes can be discovered from that jurisdiction. Individual state-government catalogues remain incomplete and route users to the official myScheme State/UT finder.
+- The schema adds schemes, scheme-jurisdiction availability, sourced eligibility rules and application-channel records. CSV export preserves the reviewed seed and its limitations.
+- PM SVANidhi and state-specific loan corporations are future source-review work, not silently omitted claims of non-availability.
+
 ## Seed sources through v0.8
 
 - Government of India, Budget at a Glance 2025–26.
@@ -138,13 +149,14 @@ No other interface card should display an apparently complete numeric result unt
 
 ## Remaining production steps
 
-1. Convert the normalized application model into persistent SQL tables for sources, measures, promises, observations and revision history.
+1. Provision a persistent database and safely migrate the existing evidence and scheme schema.
 2. Establish an editorial source archive and two-person review for status changes.
-3. Ingest and review state tables topic by topic, beginning with same-year education, health, CPI and audited public-finance series.
-4. Add state budget and audit-source mapping without promising real-time refresh.
-5. Build the secure citizen-report backend only after privacy, moderation and authority-routing decisions are approved.
-6. Add automated accessibility, broken-link and source-freshness checks.
-7. Revisit official weather warnings only if legitimate IMD access is approved; do not treat the government-email restriction as a technical problem to bypass.
+3. Review state loan corporations and department schemes jurisdiction by jurisdiction, beginning with current official eligibility and application routes.
+4. Ingest and review state evidence tables topic by topic, beginning with same-year education, health, CPI and audited public-finance series.
+5. Add state budget and audit-source mapping without promising real-time refresh.
+6. Build the secure citizen-report backend only after privacy, moderation and authority-routing decisions are approved.
+7. Add automated accessibility, broken-link and source-freshness checks.
+8. Revisit official weather warnings only if legitimate IMD access is approved; do not treat the government-email restriction as a technical problem to bypass.
 
 ## Release constraints
 

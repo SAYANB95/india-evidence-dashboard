@@ -107,3 +107,53 @@ export const corrections = sqliteTable("corrections", {
   createdAt: text("created_at").notNull(),
   resolvedAt: text("resolved_at"),
 });
+
+export const schemes = sqliteTable("schemes", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  shortName: text("short_name").notNull(),
+  responsibleBody: text("responsible_body").notNull(),
+  category: text("category").notNull(),
+  supportType: text("support_type").notNull(),
+  status: text("status", { enum: ["open_doorway", "lender_mediated", "verify_current_terms", "legacy_successor_pending"] }).notNull(),
+  amountDescription: text("amount_description").notNull(),
+  interestDescription: text("interest_description").notNull(),
+  collateralDescription: text("collateral_description").notNull(),
+  limitation: text("limitation").notNull(),
+  sourceId: text("source_id").notNull().references(() => sources.id),
+  sourceCheckedAt: text("source_checked_at").notNull(),
+  createdAt: text("created_at").notNull(),
+  updatedAt: text("updated_at").notNull(),
+});
+
+export const schemeJurisdictions = sqliteTable("scheme_jurisdictions", {
+  id: text("id").primaryKey(),
+  schemeId: text("scheme_id").notNull().references(() => schemes.id),
+  jurisdictionId: text("jurisdiction_id").notNull().references(() => jurisdictions.id),
+  availabilityStatus: text("availability_status", { enum: ["national_route", "state_verified", "state_gap", "not_available"] }).notNull(),
+  localAgency: text("local_agency"),
+  localSourceId: text("local_source_id").references(() => sources.id),
+  checkedAt: text("checked_at").notNull(),
+}, (table) => [uniqueIndex("scheme_jurisdiction_unique").on(table.schemeId, table.jurisdictionId)]);
+
+export const eligibilityRules = sqliteTable("eligibility_rules", {
+  id: text("id").primaryKey(),
+  schemeId: text("scheme_id").notNull().references(() => schemes.id),
+  field: text("field").notNull(),
+  operator: text("operator", { enum: ["equals", "includes", "minimum", "maximum", "required", "excludes"] }).notNull(),
+  expectedValue: text("expected_value").notNull(),
+  ruleText: text("rule_text").notNull(),
+  sourceId: text("source_id").notNull().references(() => sources.id),
+  sortOrder: integer("sort_order").notNull(),
+});
+
+export const applicationChannels = sqliteTable("application_channels", {
+  id: text("id").primaryKey(),
+  schemeId: text("scheme_id").notNull().references(() => schemes.id),
+  channelType: text("channel_type", { enum: ["official_portal", "bank", "mission_office", "bank_mitra", "offline_office"] }).notNull(),
+  label: text("label").notNull(),
+  url: text("url"),
+  instructions: text("instructions").notNull(),
+  activeStatus: text("active_status", { enum: ["verified", "status_check_required", "closed"] }).notNull(),
+  checkedAt: text("checked_at").notNull(),
+});
