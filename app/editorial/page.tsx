@@ -16,9 +16,9 @@ export default async function EditorialPage(){const system=await getSystemStatus
   <header className="record-header"><a className="record-brand" href="/"><span className="brand-mark"/><b>India Evidence <em>Dashboard</em></b></a><nav><a href="#queue">Review queue</a><a href="#model">Evidence model</a><a href="#policy">Publication gate</a></nav><a className="record-compare" href="/editorial/manage">Editorial sign-in</a></header>
   <section className="editorial-hero"><p className="eyebrow">Public workflow record · read only</p><h1>Evidence needs<br/><span>a chain of custody.</span></h1><p>This public console shows how dashboard records retain sources, definitions, gaps, revisions and approval gates. Persistent storage and protected editorial sign-in are connected; write actions exist only inside the role-gated manager.</p><div className="editorial-system-state"><i/><b>Postgres {system.database}</b><span>{system.jurisdictions || 37} jurisdiction rows</span><span>{system.sources || editorialStats.sources} source rows</span><span>Clerk role-gated sign-in active</span><span>Public data remains read only</span></div></section>
   <section className="editorial-summary" aria-label="Editorial migration summary">
-    <article><span>Seed records</span><strong>{editorialStats.records}</strong><p>Existing verified toll and infrastructure records mapped into the normalized model.</p></article>
+    <article><span>Source-checked records</span><strong>{editorialStats.records}</strong><p>Existing verified toll and infrastructure records mapped into the normalized model.</p></article>
     <article><span>Distinct source URLs</span><strong>{editorialStats.sources}</strong><p>Duplicate source pages remain one source entity with multiple evidence records.</p></article>
-    <article><span>Ready for import</span><strong>{editorialStats.ready}</strong><p>Meets this seed migration check; not equivalent to editorial publication approval.</p></article>
+    <article><span>Ready for import</span><strong>{editorialStats.ready}</strong><p>Required migration fields are present; this is not editorial publication approval.</p></article>
     <article><span>Missing fields disclosed</span><strong>{editorialStats.gaps}</strong><p>Unknown fields remain gaps and are never silently converted to zero.</p></article>
   </section>
   <EditorialClient records={editorialRecords}/>

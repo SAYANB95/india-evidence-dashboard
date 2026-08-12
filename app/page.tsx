@@ -217,10 +217,10 @@ const dataMenu = [
 ] as const;
 
 const decadeEvidence = [
-  { period: "1947–59", title: "Independence and the Constitution", detail: "Public validation anchor: constitutional text and commencement record.", href: "https://legislative.gov.in/constitution-of-india/" },
+  { period: "1947–59", title: "Independence and the Constitution", detail: "Official record linked: constitutional text and commencement record.", href: "https://legislative.gov.in/constitution-of-india/" },
   { period: "1960s", title: "Sample Registration System begins", detail: "Birth and death estimates move toward a continuing dual-record statistical system.", href: "https://censusindia.gov.in/census.website/en/node/180" },
   { period: "1970s", title: "Constitutional amendments register", detail: "Amendment texts are indexed; policy outcomes still require separate evidence.", href: "https://legislative.gov.in/constitution-amendment-acts/" },
-  { period: "1980s", title: "Environment protection framework", detail: "The statutory record is an anchor, not proof of enforcement or outcomes.", href: "https://www.indiacode.nic.in/" },
+  { period: "1980s", title: "Environment protection framework", detail: "The linked law confirms the framework, not its enforcement or outcomes.", href: "https://www.indiacode.nic.in/" },
   { period: "1990s", title: "Economic reform and local-government change", detail: "The decade register separates policy announcements from measurable results.", href: "https://www.rbi.org.in/" },
   { period: "2000s", title: "RTI and rights-based programmes", detail: "Acts, rules, budgets and delivery evidence are tracked as distinct layers.", href: "https://rti.gov.in/" },
   { period: "2010s", title: "GST and digital public infrastructure", detail: "National implementation records require state and sector breakdowns.", href: "https://www.gst.gov.in/" },
@@ -299,7 +299,7 @@ const modules = [
     number: "04",
     title: "Budgets & sectors",
     description: "Union and state estimates, revised estimates and actuals kept visibly distinct.",
-    status: "Union seed loaded",
+    status: "Official Union record available",
     tone: "ready",
     tags: ["BE", "RE", "actuals"],
   },
@@ -315,7 +315,7 @@ const modules = [
     number: "06",
     title: "Environment",
     description: "Forest and tree cover, air quality, water and other pollution by reporting period.",
-    status: "Forest seed loaded",
+    status: "Official forest record available",
     tone: "ready",
     tags: ["Forest", "air", "pollution"],
   },
@@ -762,7 +762,7 @@ export default function Home() {
             <p className="eyebrow">{jurisdiction.startsWith("India") ? "National overview" : `${unionTerritories.includes(jurisdiction) ? "Union territory" : "State"} overview`}</p>
             <h2>{jurisdiction.startsWith("India") ? "Three facts. Full context." : jurisdiction}</h2>
           </div>
-          <p>{jurisdiction.startsWith("India") ? "Seed evidence is intentionally small. Each figure is linked to a public primary source and carries a definition and limitation." : `The overview now follows the selected jurisdiction. These are official annual records for ${jurisdiction}, not national totals or a performance score.`}</p>
+          <p>{jurisdiction.startsWith("India") ? "This opening view shows a small set of verified examples. Each figure links to a public primary source and states its definition and limitation." : `The overview now follows the selected jurisdiction. These are official annual records for ${jurisdiction}, not national totals or a performance score.`}</p>
         </div>
 
         {jurisdiction.startsWith("India") ? <div className="metric-grid">
@@ -879,21 +879,21 @@ export default function Home() {
       <section className="section timeline-section" id="timeline">
         <div className="section-heading inverse">
           <div><p className="eyebrow">1947 → present</p><h2>The gaps belong in the timeline too.</h2></div>
-          <p>This register provides at least one public validation anchor for every decade from 1947 onward. It is not the number of events that occurred or a claim of complete government coverage.</p>
+          <p>This register links at least one official or public record for every decade from 1947 onward. It is not the number of events that occurred or a claim of complete government coverage.</p>
         </div>
-        <div className="decade-strip" aria-label="Decade-by-decade public validation anchors">
-          {decadeEvidence.map((item) => <a className="decade loaded" href={`#decade-${item.period.replace(/\W/g, "")}`} key={item.period}><span>{item.period}</span><i /><b>1 anchor loaded</b></a>)}
+        <div className="decade-strip" aria-label="Decade-by-decade source-linked records">
+          {decadeEvidence.map((item) => <a className="decade loaded" href={`#decade-${item.period.replace(/\W/g, "")}`} key={item.period}><span>{item.period}</span><i /><b>Official record linked</b></a>)}
         </div>
         <div className="timeline-cards decade-register">
           {decadeEvidence.map((item) => (
             <article id={`decade-${item.period.replace(/\W/g, "")}`} key={item.period}>
-              <span>{item.period} · public validation anchor</span>
+              <span>{item.period} · source-linked milestone</span>
               <h3>{item.title}</h3>
               <p>{item.detail}</p>
               <ExternalLink href={item.href} className="inverse-link">Open primary public doorway</ExternalLink>
             </article>
           ))}
-          <article className="gap-card"><span>Coverage warning</span><h3>One anchor does not mean a decade is complete.</h3><p>Budgets, governments, laws, schemes, crises and outcomes need separate records. Missing records remain visible in the editorial queue.</p><a href="#methodology" className="inverse-link">Read the inclusion rule <span>↓</span></a></article>
+          <article className="gap-card"><span>Coverage warning</span><h3>One linked record does not make a decade complete.</h3><p>Budgets, governments, laws, schemes, crises and outcomes need separate records. Missing records remain visible in the editorial queue.</p><a href="#methodology" className="inverse-link">Read the inclusion rule <span>↓</span></a></article>
         </div>
       </section>
 
@@ -938,8 +938,8 @@ export default function Home() {
               {!jurisdiction.startsWith("India") && <a className="state-record-link" href={`/state/${jurisdictionSlug(jurisdiction)}`}>Open complete {jurisdiction} record →</a>}
             </div>
             <div className="state-topic-cards">
-              <article><span>Budget & public finance</span><strong>{jurisdiction.startsWith("India") ? "Union seed loaded" : "Official source mapped"}</strong><p>{jurisdiction.startsWith("India") ? "BE 2025–26 card available above." : "State BE, RE and audited actuals are not yet ingested; the source doorway is ready."}</p><ExternalLink href="https://cag.gov.in/en/state-accounts-report">CAG state accounts</ExternalLink></article>
-              <article><span>Government schemes</span><strong>{jurisdiction.startsWith("India") ? "PMAY-G seed loaded" : "State context ready"}</strong><p>{jurisdiction.startsWith("India") ? "One national proof-chain example is loaded." : `Scheme discovery is available for ${jurisdiction}; beneficiary and spend records remain source-by-source.`}</p><ExternalLink href="https://www.myscheme.gov.in/">Official myScheme portal</ExternalLink></article>
+              <article><span>Budget & public finance</span><strong>{jurisdiction.startsWith("India") ? "Official Union example available" : "Official source identified"}</strong><p>{jurisdiction.startsWith("India") ? "BE 2025–26 card available above." : "State BE, RE and audited actuals are not yet ingested; the source doorway is ready."}</p><ExternalLink href="https://cag.gov.in/en/state-accounts-report">CAG state accounts</ExternalLink></article>
+              <article><span>Government schemes</span><strong>{jurisdiction.startsWith("India") ? "PMAY-G example available" : "State context ready"}</strong><p>{jurisdiction.startsWith("India") ? "One national evidence-chain example is available." : `Scheme discovery is available for ${jurisdiction}; beneficiary and spend records remain source-by-source.`}</p><ExternalLink href="https://www.myscheme.gov.in/">Official myScheme portal</ExternalLink></article>
               <article><span>Health structure</span><strong>Official source mapped</strong><p>Facility and bed capacity are periodic reports. No unverified real-time vacancy number is shown.</p><ExternalLink href="https://hmis.mohfw.gov.in/">MoHFW HMIS doorway</ExternalLink></article>
               <article><span>Environment</span><strong>{liveAir ? `${liveAir.station} connected` : airLoading ? "Loading CPCB station" : "CPCB unavailable"}</strong><p>{liveAir ? `${liveAir.pollutants.length} pollutant records near the reference location; not a statewide average.` : "The selected-state CPCB station feed appears in the live section when available."}</p><ExternalLink href="https://www.data.gov.in/resource/real-time-air-quality-index-various-locations">CPCB source</ExternalLink></article>
             </div>

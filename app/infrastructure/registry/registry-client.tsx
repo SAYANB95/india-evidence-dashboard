@@ -43,7 +43,7 @@ export default function RegistryClient({tollPlazas, projects}:{tollPlazas:TollPl
   return <section className="registry-body" id="registry">
     <div className="registry-coverage" aria-label="Registry coverage">
       <article><span>Verified plaza records</span><strong>{tollPlazas.length}</strong><p>Across {tollStates} states; official 2024 total was 1,051 ETC plazas.</p></article>
-      <article><span>Seed coverage</span><strong>{(tollPlazas.length/1051*100).toFixed(1)}%</strong><p>Illustrative coverage only—not a statistically representative sample.</p></article>
+      <article><span>Records currently covered</span><strong>{(tollPlazas.length/1051*100).toFixed(1)}%</strong><p>Illustrative coverage only—not a statistically representative sample.</p></article>
       <article><span>Project/programme records</span><strong>{projects.length}</strong><p>Road, rail and aviation across {projectModes} transport modes.</p></article>
       <article><span>Plaza field completeness</span><strong>{costLoaded}/{revenueLoaded}</strong><p>Capital-cost loaded / cumulative-revenue loaded.</p></article>
     </div>
@@ -57,10 +57,10 @@ export default function RegistryClient({tollPlazas, projects}:{tollPlazas:TollPl
       <label>Search records<input value={query} onChange={event=>setQuery(event.target.value)} placeholder={view === "tolls" ? "Plaza, highway, stretch…" : "Project, agency, milestone…"}/></label>
       <label>Jurisdiction<select value={state} onChange={event=>setState(event.target.value)}>{states.map(item=><option key={item}>{item}</option>)}</select></label>
       <label>{view === "tolls" ? "Delivery model" : "Transport mode"}<select value={category} onChange={event=>setCategory(event.target.value)}>{categories.map(item=><option key={item}>{item}</option>)}</select></label>
-      <a className="registry-download" href={`/api/infrastructure/export?dataset=${view}`}>Download full seed CSV ↓</a>
+      <a className="registry-download" href={`/api/infrastructure/export?dataset=${view}`}>Download current records CSV ↓</a>
     </div>
 
-    <div className="registry-result-line"><b>{filtered.length}</b> of {dataset.length} verified seed records shown <span>· Sorted alphabetically · No performance rank</span></div>
+    <div className="registry-result-line"><b>{filtered.length}</b> of {dataset.length} source-checked records shown <span>· Sorted alphabetically · No performance rank</span></div>
 
     {view === "tolls" ? <div className="registry-grid">{(filtered as TollPlaza[]).map(plaza=><article className="registry-card" key={plaza.id}>
       <div className="registry-card-head"><span>{plaza.state} · {plaza.highway}</span><b>{plaza.model}</b><h2>{plaza.name}</h2><p>{plaza.stretch} · {plaza.location}</p></div>
@@ -81,7 +81,7 @@ export default function RegistryClient({tollPlazas, projects}:{tollPlazas:TollPl
       <details><summary>Definition & limitation <span>+</span></summary><p>{project.progressDefinition}</p><dl><div><dt>Contractor / operator</dt><dd>{value(project.contractor)}</dd></div><div><dt>Source period</dt><dd>{project.sourcePeriod}</dd></div></dl></details>
       <a href={project.sourceUrl} target="_blank" rel="noreferrer">Open primary public record ↗</a>
     </article>)}</div>}
-    {filtered.length === 0 && <div className="registry-empty"><b>No matching verified seed record.</b><p>Clear a filter or search another name. Absence here does not mean the plaza or project does not exist.</p></div>}
+    {filtered.length === 0 && <div className="registry-empty"><b>No matching record in the current sample.</b><p>Clear a filter or search another name. Absence here does not mean the plaza or project does not exist.</p></div>}
     <aside className="registry-method"><b>Coverage rule</b><p>The 1,051-plaza denominator is the MoRTH count of NH fee plazas with electronic toll collection as of 31 December 2024. The eight displayed pages are manually verified examples from NHTIS. They are not a complete sample, live transaction feed, fraud register or quality ranking.</p><a href="https://morth.nic.in/sites/default/files/Annual-Report-English-with-Cover.pdf" target="_blank" rel="noreferrer">MoRTH Annual Report 2024–25 ↗</a></aside>
   </section>;
 }

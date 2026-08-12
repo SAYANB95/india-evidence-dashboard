@@ -116,6 +116,11 @@ test("pre-renders a document-first freedom movement and contested-history archiv
   assert.match(history,/National Archives of India/);
   assert.match(history,/People beyond/);
   assert.match(history,/the usual shortlist/);
+  assert.match(history,/Bengal was the largest recorded group/);
+  assert.match(history,/398 revolutionaries from undivided Bengal/);
+  assert.match(history,/585(?:<!-- -->)? people/);
+  assert.match(history,/not the number of freedom fighters from this jurisdiction/i);
+  assert.match(history,/Open the parliamentary answer/);
   assert.match(history,/Velu Nachiyar/);
   assert.match(history,/U Tirot Sing/);
   assert.match(history,/What the document proves/);
@@ -164,7 +169,7 @@ test("keeps the public editorial evidence console read only", async () => {
   assert.match(html, /Evidence needs/);
   assert.match(html, /Persistent storage and protected editorial sign-in are connected/);
   assert.match(html, /Clerk role-gated sign-in active/);
-  assert.match(html, /Seed migration queue/);
+  assert.match(html, /Evidence migration queue/);
   assert.match(html, /Second-person approval/);
   assert.match(html, /Haladgaon/);
   assert.doesNotMatch(html, /Save changes|Publish now|Delete record/i);

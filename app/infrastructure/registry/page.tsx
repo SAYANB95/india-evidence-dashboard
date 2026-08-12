@@ -6,7 +6,7 @@ import RegistryClient from "./registry-client";
 
 export const metadata: Metadata = {
   title: "Toll & infrastructure registry — India Evidence Dashboard",
-  description: "A source-linked seed register of Indian toll plazas and road, rail and aviation projects.",
+  description: "A source-linked sample register of Indian toll plazas and road, rail and aviation projects.",
 };
 
 export default function InfrastructureRegistryPage() {
@@ -19,7 +19,7 @@ export default function InfrastructureRegistryPage() {
     <section className="registry-hero">
       <p className="eyebrow">Official-record explorer</p>
       <h1>Plazas and projects.<br/><span>One claim at a time.</span></h1>
-      <p>This is a verified seed registry, not a complete national database. Every row links to the public record used; absent cost, revenue, traffic or deadline fields are shown as data gaps.</p>
+      <p>This is a small source-checked sample, not a complete national database. Every row links to the public record used; absent cost, revenue, traffic or deadline fields are shown as data gaps.</p>
     </section>
     <RegistryClient tollPlazas={tollPlazas} projects={projects}/>
     <footer className="record-footer"><a href="/infrastructure">← Transport evidence room</a><a href="/">National dashboard</a><a href="/#methodology">Methodology</a></footer>

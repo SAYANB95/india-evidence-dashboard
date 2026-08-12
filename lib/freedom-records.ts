@@ -1,5 +1,30 @@
 export type FreedomRecord={id:string;name:string;state:string;district:string;period:string;movement:string;record:string;sourceUrl:string;sourceTitle:string;reviewNote:string};
 
+export type CellularJailProvinceRecord={province:string;count:number;note?:string};
+
+export const cellularJailSource={
+  title:"Ministry of Culture — Rajya Sabha Unstarred Question No. 985",
+  date:"13 February 2025",
+  period:"1909–1938",
+  url:"https://sansad.in/getFile/annex/267/AU985_1iedDF.pdf?source=pqars",
+  definition:"Revolutionaries recorded by the Directorate of Art and Culture, Andaman & Nicobar Administration as jailed in Cellular Jail from 1909 to 1938, grouped by the province/state labels printed in the parliamentary annexure.",
+  limitation:"This is a Cellular Jail incarceration count, not a count of every participant in India's freedom struggle. Historical Bengal is undivided Bengal and must not be treated as present-day West Bengal alone."
+} as const;
+
+export const cellularJailProvinceRecords:CellularJailProvinceRecord[]=[
+  {province:"Bengal",count:398,note:"Undivided Bengal; not present-day West Bengal alone"},
+  {province:"Punjab",count:95},
+  {province:"Maharashtra",count:3},
+  {province:"Bihar",count:17},
+  {province:"Uttar Pradesh",count:18},
+  {province:"Kerala",count:14},
+  {province:"Andhra Pradesh",count:8},
+  {province:"Odisha",count:5},
+  {province:"Himachal / NW Frontier / Tamil Nadu / state unknown",count:27,note:"Combined category as published; cannot be separated from this source"}
+];
+
+export const cellularJailTotal=cellularJailProvinceRecords.reduce((sum,item)=>sum+item.count,0);
+
 export const freedomRecords:FreedomRecord[]=[
   {id:"velu-nachiyar",name:"Velu Nachiyar",state:"Tamil Nadu",district:"Ramanathapuram / Sivaganga",period:"c. 1730-1796",movement:"Early anti-colonial resistance",record:"The Ministry of Culture profile describes her alliance-building and armed campaign against the East India Company before the nineteenth-century mass movements.",sourceUrl:"https://amritmahotsav.nic.in/unsung-heroes-detail.htm?312=",sourceTitle:"Ministry of Culture - Unsung Heroes",reviewNote:"Official commemorative narrative; archival corroboration of individual episode details remains required."},
   {id:"kittur-rani-chennamma",name:"Kittur Rani Chennamma",state:"Karnataka",district:"Belagavi",period:"1778-1829",movement:"Kittur resistance",record:"The official profile records her armed opposition to British refusal to recognise Kittur's succession and her subsequent imprisonment at Bailhongal.",sourceUrl:"https://cmsadmin.amritmahotsav.nic.in/unsung-heroes-detail.htm?188=",sourceTitle:"Ministry of Culture - Unsung Heroes",reviewNote:"Official commemorative profile based on a civil-service academy publication."},

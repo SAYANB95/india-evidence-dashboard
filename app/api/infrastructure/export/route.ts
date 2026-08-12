@@ -7,6 +7,6 @@ export async function GET(request:Request){
   const records=dataset === "projects" ? projects : tollPlazas;
   const headers=Array.from(new Set(records.flatMap(record=>Object.keys(record))));
   const csv=[headers.map(safeCsvCell).join(","),...records.map(record=>headers.map(header=>safeCsvCell((record as Record<string,unknown>)[header]??"Data gap")).join(","))].join("\n");
-  const name=dataset === "projects" ? "infrastructure-projects-seed.csv" : "toll-plazas-seed.csv";
+  const name=dataset === "projects" ? "infrastructure-projects-current-sample.csv" : "toll-plazas-current-sample.csv";
   return new Response(csv,{headers:{"content-type":"text/csv; charset=utf-8","content-disposition":`attachment; filename="${name}"`,"cache-control":"public, max-age=3600"}});
 }

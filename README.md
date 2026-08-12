@@ -14,6 +14,7 @@ This repository is a public-safe website foundation. Version 2.0 adds the offici
 - `/history`, a document-first archive with initial dossiers on district freedom fighters, Subhas Chandra Bose and the INA, Savarkar's clemency petitions, and controversies concerning Syama Prasad Mookerjee;
 - `/state-packs`, a searchable and sortable all-36 table of official UDISE+ education counts, SRS vital-statistics estimates and Health Dynamics public-system bed capacity, with CSV export and source-period warnings;
 - a searchable reviewed history seed containing 12 freedom-movement people from multiple regions and five primary-document doorways; this is a starting register, not a complete national list;
+- the Ministry of Culture's complete published Cellular Jail province table for 585 recorded revolutionaries jailed in 1909–1938, including 398 from undivided Bengal; this official aggregate is kept separate from the 12 individually reviewed profile cards and is not a count of every freedom-struggle participant;
 - the same 46-domain ledger on every state and UT page, so no jurisdiction silently loses a category when its numeric evidence is missing;
 - `/operations`, a public-safe register of stored coverage, source health, running connectors, periodic releases and held production gates;
 - `/corrections`, a stored public correction pathway that collects no name, email, phone, image or location and never changes published evidence automatically;
