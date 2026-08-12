@@ -119,8 +119,8 @@ test("protects editorial actions with roles, audit revisions and a second-person
   assert.match(files, /redirect\("\/sign-in/);
   assert.match(files, /editor|reviewer|publisher/);
   assert.match(files, /different user/);
-  assert.match(files, /db\.insert\(reviews\)/);
-  assert.match(files, /db\.insert\(revisions\)/);
+  assert.match(files, /inserted_review/);
+  assert.match(files, /INSERT INTO \$\{revisions\}/);
   assert.doesNotMatch(files, /temporary password|auth bypass/i);
 });
 
@@ -163,4 +163,10 @@ test("Postgres migration creates the persistent evidence and freshness model", a
   }
   assert.match(sql, /record_revision_unique/);
   assert.match(sql, /source_url_unique/);
+});
+
+test("security migration creates an editorial request-rate ledger", async () => {
+  const sql = await readFile(new URL("../drizzle-pg/0001_red_puppet_master.sql", import.meta.url), "utf8");
+  assert.match(sql, /CREATE TABLE "editorial_action_attempts"/);
+  assert.match(sql, /editorial_attempt_actor_time_idx/);
 });

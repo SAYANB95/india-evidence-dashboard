@@ -8,6 +8,13 @@
       "when": 1786539783801,
       "tag": "0000_small_rictor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1786543432622,
+      "tag": "0001_red_puppet_master",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,5 @@
 import { economy, slugifyJurisdiction, topicRecords } from "../../../../lib/evidence";
-
-function csv(value: unknown) { return `"${String(value ?? "").replaceAll('"','""')}"`; }
+import { safeCsvCell, safeDownloadSlug } from "../../../../lib/csv";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -12,7 +11,6 @@ export async function GET(request: Request) {
     [jurisdiction,"Economy","Per-capita NSDP",economic.perCapita?.value ?? "","rupees per person",economic.perCapita?.year ?? "","available","Per-capita NSDP at current prices","An average, not typical salary or wealth","https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=22483"],
     ...topicRecords.map((topic) => [jurisdiction,topic.group,topic.label,"","",topic.period,topic.status,topic.definition,topic.limitation,topic.sourceUrl]),
   ];
-  const body = rows.map((row) => row.map(csv).join(",")).join("\n");
-  const filename = `${url.searchParams.get("slug") || slugifyJurisdiction(jurisdiction)}-evidence.csv`;
-  return new Response(body,{ headers:{ "Content-Type":"text/csv; charset=utf-8", "Content-Disposition":`attachment; filename="${filename}"`, "Cache-Control":"public, max-age=3600" } });
+  const filename = `${safeDownloadSlug(url.searchParams.get("slug"),slugifyJurisdiction(jurisdiction))}-evidence.csv`;
+  return new Response(rows.map((row) => row.map(safeCsvCell).join(",")).join("\n"),{ headers:{ "Content-Type":"text/csv; charset=utf-8", "Content-Disposition":`attachment; filename="${filename}"`, "Cache-Control":"public, max-age=3600" } });
 }

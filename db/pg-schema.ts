@@ -1,4 +1,4 @@
-import { boolean, doublePrecision, integer, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core";
+import { boolean, doublePrecision, index, integer, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core";
 
 export const jurisdictions = pgTable("jurisdictions", {
   id: text("id").primaryKey(), name: text("name").notNull(), type: text("type").notNull(), parentId: text("parent_id"),
@@ -45,6 +45,10 @@ export const reviews = pgTable("reviews", {
   id: text("id").primaryKey(), recordId: text("record_id").notNull().references(() => evidenceRecords.id), reviewType: text("review_type").notNull(),
   decision: text("decision").notNull(), note: text("note").notNull(), reviewerId: text("reviewer_id").notNull(), createdAt: text("created_at").notNull(),
 });
+
+export const editorialActionAttempts = pgTable("editorial_action_attempts", {
+  id: text("id").primaryKey(), actorId: text("actor_id").notNull(), route: text("route").notNull(), attemptedAt: text("attempted_at").notNull(),
+}, table => [index("editorial_attempt_actor_time_idx").on(table.actorId, table.attemptedAt)]);
 
 export const corrections = pgTable("corrections", {
   id: text("id").primaryKey(), recordId: text("record_id").references(() => evidenceRecords.id), requesterContactHash: text("requester_contact_hash"),

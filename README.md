@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.4 connects a production Postgres evidence store, protected Clerk editorial identities, role-checked review actions, immutable revision entries and a second-person publication gate. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.5 connects a production Postgres evidence store, protected Clerk editorial identities, role-checked review actions, immutable revision entries, a second-person publication gate and a focused pre-launch security hardening pass. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -127,7 +127,7 @@ The schema now also defines `schemes`, `scheme_jurisdictions`, `eligibility_rule
 
 The Vercel project now has a managed Neon Postgres resource. The committed Postgres migration defines 13 tables for jurisdictions, sources, evidence records, observations, promises, revisions, reviews, corrections, schemes, jurisdiction coverage, eligibility rules, application channels and append-only source checks. The first production seed contains 37 jurisdiction rows, 20 distinct sources, 16 reviewed transport evidence records, eight national scheme records, 288 scheme-jurisdiction coverage rows and 24 published eligibility conditions.
 
-`/api/system/status` reports database connectivity and row counts without exposing credentials. A protected Vercel Cron endpoint checks every stored source daily, records response status and duration, and updates the source health state. Access-restricted or anti-bot responses remain distinct from confirmed unavailable pages. The cron route requires `CRON_SECRET`; it cannot be triggered anonymously. A failed link check changes link-health metadata—it does not delete evidence or silently change a public verdict.
+`/api/system/status` reports only public coverage and source-health summaries without exposing provider names, credentials, authentication configuration or database connection details. A protected Vercel Cron endpoint checks every stored source daily, records response status and duration, and updates the source health state. Access-restricted or anti-bot responses remain distinct from confirmed unavailable pages. The cron route requires `CRON_SECRET`; it cannot be triggered anonymously. A failed link check changes link-health metadata—it does not delete evidence or silently change a public verdict.
 
 The public editorial console remains intentionally read-only. Clerk protects the separate manager route and review API. Roles are stored in Clerk public metadata as `editor`, `reviewer` or `publisher`; every action is validated again on the server and written to both the review and revision audit tables. Publication approval is limited to publishers and requires approved source and definition reviews, including an approval from a different authenticated user. No temporary password, public write API or authentication bypass is included.
 
@@ -169,7 +169,13 @@ npm run build
 npm test
 ```
 
-`DATA_GOV_IN_API_KEY` is required for the official CPCB panel. The Open-Meteo demo works without a credential. No database or upload storage is configured.
+`DATA_GOV_IN_API_KEY` is required for the official CPCB panel. The Open-Meteo demo works without a credential. Neon Postgres and Clerk are configured on Vercel; no public file-upload storage is connected.
+
+## Security hardening in v1.5
+
+The supplied five-prompt security checklist was applied to the current repository. Global responses now include CSP, HSTS, clickjacking, MIME-sniffing, referrer and permissions protections. Protected review writes require Clerk identity, a server-controlled role, same-origin JSON, a bounded body, a per-account request ledger and the existing second-person publication rule. Review, workflow update and revision creation execute as one atomic SQL statement. CSV downloads neutralize spreadsheet formulas and sanitize filenames. Scheduled source checks validate HTTPS and public DNS targets at every redirect to reduce SSRF risk. Unexpected review failures return a correlation ID without a stack trace or database detail.
+
+This is hardening, not a claim that the system is unhackable. Clerk owns password/session storage and authentication rate controls; Neon owns managed database transport and access controls. The app stores Clerk user IDs in editorial audit rows but does not store reviewer passwords, phone numbers or payment data. Before adding public uploads, payments, citizen accounts or sensitive personal data, commission an independent human penetration test and privacy review.
 
 ## Before production
 

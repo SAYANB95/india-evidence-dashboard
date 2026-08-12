@@ -1,6 +1,6 @@
 {
   "name": "india-evidence-dashboard",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
@@ -10,10 +10,10 @@
     "dev:network": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/security-regression.test.mjs && tsx --test tests/security-runtime.test.ts",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .vercel",
     "db:generate": "drizzle-kit generate",
-    "db:generate:pg": "drizzle-kit generate --config drizzle.postgres.config.ts",
+    "db:generate:pg": "dotenv -e .env.local -- drizzle-kit generate --config drizzle.postgres.config.ts",
     "db:migrate:pg": "dotenv -e .env.local -- drizzle-kit migrate --config drizzle.postgres.config.ts",
     "db:seed:pg": "dotenv -e .env.local -- tsx scripts/seed-postgres.ts"
   },
@@ -26,15 +26,12 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.37.1",
     "@eslint/js": "9.39.4",
     "@next/eslint-plugin-next": "^16.3.0",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.26",
     "dotenv-cli": "^11.0.0",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
@@ -42,14 +39,15 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
     "globals": "16.4.0",
-    "react-server-dom-webpack": "^19.2.8",
     "tailwindcss": "4.2.1",
     "tsx": "^4.23.12",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.59.3",
-    "vinext": "1.0.0-beta.2",
-    "vite": "8.0.13",
-    "wrangler": "4.92.0"
+    "typescript-eslint": "8.59.3"
+  },
+  "overrides": {
+    "@esbuild-kit/core-utils": {
+      "esbuild": "^0.25.0"
+    }
   },
   "type": "module"
 }
