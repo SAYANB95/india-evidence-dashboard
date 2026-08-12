@@ -79,6 +79,21 @@ test("pre-renders the complete evidence catalogue and privacy correction pathway
   assert.match(corrections,/Submit correction request/);
 });
 
+test("pre-renders a document-first freedom movement and contested-history archive",async()=>{
+  const [history,catalog]=await Promise.all([renderStaticPage("history"),renderStaticPage("catalog")]);
+  assert.match(history,/History deserves/);
+  assert.match(history,/Freedom fighters across India/);
+  assert.match(history,/Subhas Chandra Bose and the INA/);
+  assert.match(history,/Clemency petitions and colonial prison record/);
+  assert.match(history,/Syama Prasad Mookerjee/);
+  assert.match(history,/Verified starting points/);
+  assert.match(history,/Contested interpretations/);
+  assert.match(history,/We can document betrayal claims/);
+  assert.match(history,/Digital District Repository/);
+  assert.match(history,/National Archives of India/);
+  assert.match(catalog,/Freedom movement people, documents and disputes/);
+});
+
 test("pre-renders transport finance, service and audit evidence", async () => {
   const html = await renderInfrastructure();
   assert.match(html, /Built, financed, charged/);

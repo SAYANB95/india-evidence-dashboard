@@ -213,7 +213,7 @@ const dataMenu = [
   { title: "Economy & budgets", links: [["GDP and state output", "#economy"], ["Per-capita NSDP", "#economy"], ["Debt and reported assets", "#economy"], ["Wealth distribution", "#economy"], ["Budget bifurcation", "#evidence"]] },
   { title: "People & services", links: [["Loans and scheme finder", "/schemes"], ["Birth rate", "#jurisdictions"], ["Sex ratio at birth", "#jurisdictions"], ["Schools and students", "#jurisdictions"], ["Hospitals and beds", "#jurisdictions"], ["Ambulances", "#jurisdictions"]] },
   { title: "Safety & infrastructure", links: [["Toll and project registry", "/infrastructure/registry"], ["Transport evidence room", "/infrastructure"], ["NHAI, roads and tolls", "/infrastructure#roads"], ["Railways and aviation", "/infrastructure#rail"], ["Registered crime", "#jurisdictions"], ["Road condition reports", "#road-report"]] },
-  { title: "Accountability", links: [["Complete evidence catalogue", "/catalog"], ["Promises tracker", "#evidence"], ["1947–present timeline", "#timeline"], ["Public operations", "/operations"], ["Request a correction", "/corrections"], ["Methodology and gaps", "#methodology"]] },
+  { title: "Accountability & history", links: [["Freedom movement archive", "/history"], ["Complete evidence catalogue", "/catalog"], ["Promises tracker", "#evidence"], ["1947–present timeline", "#timeline"], ["Public operations", "/operations"], ["Request a correction", "/corrections"], ["Methodology and gaps", "#methodology"]] },
 ] as const;
 
 const decadeEvidence = [
@@ -541,6 +541,7 @@ export default function Home() {
           <a href="#jurisdictions">States & UTs</a>
           <a href="/schemes">Schemes & loans</a>
           <a href="/infrastructure">Transport</a>
+          <a href="/history">History</a>
           <a href="/explore">Evidence directory</a>
           <a href="/catalog">All domains</a>
           <a href="#methodology">Methodology</a>
