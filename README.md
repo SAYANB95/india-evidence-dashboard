@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.5 connects a production Postgres evidence store, protected Clerk editorial identities, role-checked review actions, immutable revision entries, a second-person publication gate and a focused pre-launch security hardening pass. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.6 connects a production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, a second-person publication gate, a complete 45-domain evidence catalogue, public operations transparency, and privacy-minimised stored correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -10,6 +10,10 @@ This repository is a public-safe website foundation. Version 1.5 connects a prod
 - a dedicated, shareable `/state/[jurisdiction]` page for every state and union territory;
 - `/explore`, a searchable/filterable national evidence directory;
 - `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;
+- `/catalog`, a searchable implementation ledger defining all 45 in-scope economy, finance, people, education, health, services, safety, justice, infrastructure, agriculture, environment, governance and historical evidence domains;
+- the same 45-domain ledger on every state and UT page, so no jurisdiction silently loses a category when its numeric evidence is missing;
+- `/operations`, a public-safe register of stored coverage, source health, running connectors, periodic releases and held production gates;
+- `/corrections`, a stored public correction pathway that collects no name, email, phone, image or location and never changes published evidence automatically;
 - downloadable CSV manifests containing period, status, definition, limitation and source;
 - `/infrastructure`, separating highway construction, maintenance, NHAI debt, toll collection, railway network/traffic/safety, aviation coverage and bounded audit findings;
 - `/infrastructure/registry`, an interactive verified seed register of eight NHTIS toll plazas and eight road, rail and aviation projects/programmes, with filters, expandable evidence and CSV exports;
@@ -31,6 +35,14 @@ This repository is a public-safe website foundation. Version 1.5 connects a prod
 - evidence rooms for promises, timelines, schemes, budgets, health, environment, crisis records and roads;
 - official public doorways for representatives, grievances, RTI, education, jobs, transport, water, crime/safety and digital access;
 - a non-persistent citizen road-report workflow demonstrating privacy and anti-spam requirements.
+
+## Scope completion in v1.6
+
+The product taxonomy is now complete for the agreed civic-evidence scope: 45 domains are defined, grouped, source-mapped, assigned a refresh pattern and displayed uniformly for all 36 jurisdictions. Ten domains have loaded or connected evidence, 23 have an official source doorway, 11 remain in the editorial queue, and one remains an explicit data gap. These coverage labels describe this dashboard, not the importance or performance of a state or government.
+
+Category completion is not data fabrication. A domain can be fully represented in the product model while its observations remain unfilled until a compatible official release is ingested and reviewed. Future work is therefore data expansion, source maintenance and editorial operation—not discovery of another missing top-level category.
+
+The correction API requires same-origin JSON, a bounded body, a server-only HMAC salt, persistent anonymous rate limits, an evidence-only attestation and an optional credential-free HTTPS source. It stores a random receipt and the correction text, not raw IP addresses or contact information.
 
 ## Evidence rules
 
@@ -179,6 +191,6 @@ The supplied five-prompt security checklist was applied to the current repositor
 
 This is hardening, not a claim that the system is unhackable. Clerk owns password/session storage and authentication rate controls; Neon owns managed database transport and access controls. The app stores Clerk user IDs in editorial audit rows but does not store reviewer passwords, phone numbers or payment data. Before adding public uploads, payments, citizen accounts or sensitive personal data, commission an independent human penetration test and privacy review.
 
-## Before production
+## Production boundaries
 
-Production work requires an editorial review workflow, source archival policy, structured jurisdiction records, automated link checks, secure storage, image moderation, duplicate detection, rate limiting, precise-location controls, consent text, correction requests and legal/privacy review. The current road-report form saves nothing.
+The public read-only product, evidence store, source checks and correction queue are production-deployed. Named editorial onboarding remains held until production identity keys replace the current development instance and the two-user approval path is re-tested. The current road-report form still saves nothing; image moderation, duplicate detection, precise-location controls, retention, consent and authority routing are required before citizen uploads can be enabled.

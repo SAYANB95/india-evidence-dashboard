@@ -6,7 +6,7 @@ export async function GET() {
   const status = await getSystemStatus();
   return Response.json({
     status: status.database === "connected" ? "operational" : status.database === "unconfigured" ? "not-configured" : "degraded",
-    coverage: { jurisdictions: status.jurisdictions, evidenceRecords: status.evidenceRecords, schemes: status.schemes },
+    coverage: { jurisdictions: status.jurisdictions, evidenceRecords: status.evidenceRecords, schemes: status.schemes, correctionRequests: status.correctionRequests },
     sourceHealth: { available: status.availableSources, restricted: status.restrictedSources, unavailable: status.unavailableSources, checkFailed: status.checkFailedSources, lastCheckedAt: status.lastSourceCheck },
     checkedAt: new Date().toISOString(),
   }, {

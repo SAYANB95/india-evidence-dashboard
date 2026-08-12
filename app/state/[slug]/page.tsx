@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { economy, getJurisdiction, jurisdictions, sources, topicRecords } from "../../../lib/evidence";
+import { economy, getJurisdiction, jurisdictions, sources } from "../../../lib/evidence";
+import { evidenceCatalog } from "../../../lib/catalog";
 import StateEvidenceClient from "./state-evidence-client";
 import JurisdictionSelect from "./jurisdiction-select";
 
@@ -22,7 +23,7 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
   return <main className="record-shell">
     <header className="record-header">
       <a className="record-brand" href="/"><span className="brand-mark" aria-hidden="true"/><b>India Evidence <em>Dashboard</em></b></a>
-      <nav aria-label="State report navigation"><a href="#economy">Economy</a><a href="#safety">Safety</a><a href="#services">Services</a><a href="/schemes">Schemes & loans</a><a href="/infrastructure">Transport</a><a href="#sources">Sources</a></nav>
+      <nav aria-label="State report navigation"><a href="#economy">Economy</a><a href="#safety">Safety</a><a href="#services">All domains</a><a href="/schemes">Schemes & loans</a><a href="/catalog">Catalogue</a><a href="#sources">Sources</a></nav>
       <a className="record-compare" href={`/compare?left=${item.slug}`}>Compare</a>
     </header>
 
@@ -42,12 +43,12 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
     <StateEvidenceClient jurisdiction={item.name} slug={item.slug}/>
 
     <section className="record-section record-topics" id="services">
-      <div className="record-section-head"><div><p className="eyebrow">Coverage ledger</p><h2>What is loaded—and what is not</h2></div><p>“Source mapped” means an official doorway exists. It does not mean the data is already integrated.</p></div>
-      <div className="topic-ledger">{topicRecords.map((topic) => <details key={topic.id} id={topic.id}><summary><span><i>{topic.group}</i>{topic.label}</span><b data-status={topic.status}>{topic.status}</b><em>+</em></summary><div><p><strong>Definition:</strong> {topic.definition}</p><p><strong>Period:</strong> {topic.period}</p><p><strong>Limitation:</strong> {topic.limitation}</p><a href={topic.sourceUrl} target={topic.sourceUrl.startsWith("http") ? "_blank" : undefined} rel="noreferrer">Open {topic.sourceLabel} ↗</a></div></details>)}</div>
+      <div className="record-section-head"><div><p className="eyebrow">Complete coverage ledger · {evidenceCatalog.length} domains</p><h2>What is loaded—and what is not</h2></div><p>Every jurisdiction receives the same evidence model. “Source mapped” means a public doorway exists; it does not mean a state observation has been ingested.</p></div>
+      <div className="topic-ledger">{evidenceCatalog.map((topic) => <details key={topic.id} id={topic.id}><summary><span><i>{topic.group}</i>{topic.label}</span><b data-status={topic.coverage}>{topic.coverage}</b><em>+</em></summary><div><p><strong>Definition:</strong> {topic.definition}</p><p><strong>Refresh:</strong> {topic.cadence} · {topic.geography}</p><p><strong>Limitation:</strong> {topic.limitation}</p><a href={topic.sourceUrl} target={topic.sourceUrl.startsWith("http") ? "_blank" : undefined} rel="noreferrer">Open {topic.sourceTitle} ↗</a></div></details>)}</div>
     </section>
 
     <section className="record-section source-manifest" id="sources"><p className="eyebrow">Evidence standard</p><h2>Every number must travel with its proof.</h2><div><p><b>Metric</b><br/>What exactly is being counted.</p><p><b>Period</b><br/>Observation year and retrieval time.</p><p><b>Geography</b><br/>The jurisdiction or station represented.</p><p><b>Source</b><br/>A public primary doorway.</p><p><b>Limitation</b><br/>What the figure cannot prove.</p></div></section>
 
-    <footer className="record-footer"><a href="/">← National dashboard</a><a href="/schemes">Find loans & schemes</a><a href="/explore">Browse all 36 jurisdictions</a><a href="/#methodology">Methodology</a></footer>
+    <footer className="record-footer"><a href="/">← National dashboard</a><a href="/schemes">Find loans & schemes</a><a href="/catalog">Complete evidence catalogue</a><a href="/corrections">Request a correction</a></footer>
   </main>;
 }

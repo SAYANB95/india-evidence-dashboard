@@ -49,14 +49,14 @@ export async function POST(request:Request){
       SELECT COALESCE(MAX(${revisions.revisionNumber}), 0) + 1 AS revision_number
       FROM ${revisions} WHERE ${revisions.recordId} = ${recordId}
     ), inserted_review AS (
-      INSERT INTO ${reviews} (${reviews.id}, ${reviews.recordId}, ${reviews.reviewType}, ${reviews.decision}, ${reviews.note}, ${reviews.reviewerId}, ${reviews.createdAt})
-      VALUES (${reviewId}, ${recordId}, ${reviewType}, ${decision}, ${note}, ${actor.userId}, ${recordedAt}) RETURNING ${reviews.id}
+      INSERT INTO ${reviews} ("id", "record_id", "review_type", "decision", "note", "reviewer_id", "created_at")
+      VALUES (${reviewId}, ${recordId}, ${reviewType}, ${decision}, ${note}, ${actor.userId}, ${recordedAt}) RETURNING "id"
     ), updated_record AS (
-      UPDATE ${evidenceRecords} SET ${evidenceRecords.workflowStatus} = ${workflowStatus}, ${evidenceRecords.updatedAt} = ${recordedAt},
-        ${evidenceRecords.publishedAt} = CASE WHEN ${workflowStatus} = 'published' THEN ${recordedAt} ELSE ${evidenceRecords.publishedAt} END
-      WHERE ${evidenceRecords.id} = ${recordId} AND EXISTS (SELECT 1 FROM inserted_review) RETURNING ${evidenceRecords.id}
+      UPDATE ${evidenceRecords} SET "workflow_status" = ${workflowStatus}, "updated_at" = ${recordedAt},
+        "published_at" = CASE WHEN ${workflowStatus} = 'published' THEN ${recordedAt} ELSE "published_at" END
+      WHERE "id" = ${recordId} AND EXISTS (SELECT 1 FROM inserted_review) RETURNING "id"
     )
-    INSERT INTO ${revisions} (${revisions.id}, ${revisions.recordId}, ${revisions.revisionNumber}, ${revisions.changedFieldsJson}, ${revisions.reason}, ${revisions.actorId}, ${revisions.createdAt})
+    INSERT INTO ${revisions} ("id", "record_id", "revision_number", "changed_fields_json", "reason", "actor_id", "created_at")
     SELECT ${revisionId}, ${recordId}, next_revision.revision_number, ${changedFields}, ${note}, ${actor.userId}, ${recordedAt}
     FROM next_revision, updated_record`);
   return Response.json({ok:true,workflowStatus,recordId,correlationId});

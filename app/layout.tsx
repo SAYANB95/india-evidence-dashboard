@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://india-evidence-dashboard-public.vercel.app"),
   title: "India Evidence Dashboard — What can be proved",
   description:
     "A politically neutral, source-linked prototype for tracking public commitments, spending, services and outcomes across India.",
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
+  openGraph: { title: "India Evidence Dashboard", description: "What changed. What can be proved across every Indian state and union territory.", type: "website", locale: "en_IN" },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased"><ClerkProvider>{children}</ClerkProvider></body>
+      <body className="antialiased"><a className="skip-link" href="#main-content">Skip to main content</a><ClerkProvider><div id="main-content">{children}</div></ClerkProvider></body>
     </html>
   );
 }

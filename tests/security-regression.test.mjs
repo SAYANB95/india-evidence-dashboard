@@ -55,3 +55,17 @@ test("public status omits provider and authentication internals",async()=>{
   assert.match(route,/sourceHealth/);
   assert.doesNotMatch(route,/writesEnabled|Clerk connected|DATABASE_URL/);
 });
+
+test("public corrections are bounded, privacy-minimised and persistently rate limited",async()=>{
+  const route=await read("../app/api/corrections/route.ts");
+  assert.match(route,/origin!==new URL\(request\.url\)\.origin/);
+  assert.match(route,/CORRECTION_HASH_SECRET/);
+  assert.match(route,/createHmac\("sha256"/);
+  assert.match(route,/recent\.value>=5/);
+  assert.match(route,/requestText\.length<30/);
+  assert.match(route,/supportingUrl/);
+  assert.match(route,/publicActionAttempts/);
+  assert.match(route,/WITH inserted_attempt AS/);
+  assert.doesNotMatch(route,/requesterContactHash|email|phone/);
+  assert.doesNotMatch(route,/error\.message|error\.stack/);
+});

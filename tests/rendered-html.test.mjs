@@ -31,6 +31,10 @@ async function renderSchemes() {
   return readFile(new URL("../.next/server/app/schemes.html", import.meta.url), "utf8");
 }
 
+async function renderStaticPage(name) {
+  return readFile(new URL(`../.next/server/app/${name}.html`, import.meta.url), "utf8");
+}
+
 async function readJson(path) {
   return JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 }
@@ -60,6 +64,19 @@ test("pre-renders a source-labelled state evidence record", async () => {
   assert.match(html, /What is loaded/);
   assert.match(html, /Data gap|data gap/);
   assert.match(html, /Download CSV/);
+  assert.match(html, /Complete coverage ledger/);
+  assert.match(html, /Courts, pendency and legal services/);
+});
+
+test("pre-renders the complete evidence catalogue and privacy correction pathway",async()=>{
+  const [catalog,corrections]=await Promise.all([renderStaticPage("catalog"),renderStaticPage("corrections")]);
+  assert.match(catalog,/Complete implementation ledger/);
+  assert.match(catalog,/Debt, liabilities and guarantees/);
+  assert.match(catalog,/Police strength, vacancies and prisons/);
+  assert.match(catalog,/Everything belongs/);
+  assert.match(corrections,/Public correction pathway/);
+  assert.match(corrections,/stores no name, email, phone number, image or precise location/i);
+  assert.match(corrections,/Submit correction request/);
 });
 
 test("pre-renders transport finance, service and audit evidence", async () => {
@@ -169,4 +186,10 @@ test("security migration creates an editorial request-rate ledger", async () => 
   const sql = await readFile(new URL("../drizzle-pg/0001_red_puppet_master.sql", import.meta.url), "utf8");
   assert.match(sql, /CREATE TABLE "editorial_action_attempts"/);
   assert.match(sql, /editorial_attempt_actor_time_idx/);
+});
+
+test("correction migration creates a persistent anonymous request-rate ledger",async()=>{
+  const sql=await readFile(new URL("../drizzle-pg/0002_mean_shinobi_shaw.sql",import.meta.url),"utf8");
+  assert.match(sql,/CREATE TABLE "public_action_attempts"/);
+  assert.match(sql,/public_attempt_actor_time_idx/);
 });

@@ -213,7 +213,7 @@ const dataMenu = [
   { title: "Economy & budgets", links: [["GDP and state output", "#economy"], ["Per-capita NSDP", "#economy"], ["Debt and reported assets", "#economy"], ["Wealth distribution", "#economy"], ["Budget bifurcation", "#evidence"]] },
   { title: "People & services", links: [["Loans and scheme finder", "/schemes"], ["Birth rate", "#jurisdictions"], ["Sex ratio at birth", "#jurisdictions"], ["Schools and students", "#jurisdictions"], ["Hospitals and beds", "#jurisdictions"], ["Ambulances", "#jurisdictions"]] },
   { title: "Safety & infrastructure", links: [["Toll and project registry", "/infrastructure/registry"], ["Transport evidence room", "/infrastructure"], ["NHAI, roads and tolls", "/infrastructure#roads"], ["Railways and aviation", "/infrastructure#rail"], ["Registered crime", "#jurisdictions"], ["Road condition reports", "#road-report"]] },
-  { title: "Accountability", links: [["Promises tracker", "#evidence"], ["1947–present timeline", "#timeline"], ["Schemes and loans", "/schemes"], ["All states and UTs", "#jurisdictions"], ["Methodology and gaps", "#methodology"]] },
+  { title: "Accountability", links: [["Complete evidence catalogue", "/catalog"], ["Promises tracker", "#evidence"], ["1947–present timeline", "#timeline"], ["Public operations", "/operations"], ["Request a correction", "/corrections"], ["Methodology and gaps", "#methodology"]] },
 ] as const;
 
 const decadeEvidence = [
@@ -542,6 +542,7 @@ export default function Home() {
           <a href="/schemes">Schemes & loans</a>
           <a href="/infrastructure">Transport</a>
           <a href="/explore">Evidence directory</a>
+          <a href="/catalog">All domains</a>
           <a href="#methodology">Methodology</a>
         </nav>
         <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="data-menu" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? "Close" : "All data"}<span aria-hidden="true">{menuOpen ? "×" : "+"}</span></button>
@@ -1123,7 +1124,7 @@ export default function Home() {
       <footer>
         <div className="brand footer-brand"><span className="brand-mark" aria-hidden="true"><b /><b /><b /></span><span>India Evidence <em>Dashboard</em></span></div>
         <p>Independent prototype for verifiable public information. No party affiliation or official endorsement. The CPCB connector requires a server-side data.gov.in key.</p>
-        <div><a href="#methodology">Methodology</a><a href="#jurisdictions">Data gaps</a><a href="#top">Back to top ↑</a></div>
+        <div><a href="/catalog">All evidence domains</a><a href="/operations">Operations</a><a href="/corrections">Corrections</a><a href="#top">Back to top ↑</a></div>
       </footer>
 
       {reportOpen && (

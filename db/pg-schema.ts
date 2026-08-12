@@ -50,6 +50,11 @@ export const editorialActionAttempts = pgTable("editorial_action_attempts", {
   id: text("id").primaryKey(), actorId: text("actor_id").notNull(), route: text("route").notNull(), attemptedAt: text("attempted_at").notNull(),
 }, table => [index("editorial_attempt_actor_time_idx").on(table.actorId, table.attemptedAt)]);
 
+export const publicActionAttempts = pgTable("public_action_attempts", {
+  id: text("id").primaryKey(), actorHash: text("actor_hash").notNull(), route: text("route").notNull(),
+  attemptedAt: text("attempted_at").notNull(),
+}, table => [index("public_attempt_actor_time_idx").on(table.actorHash, table.attemptedAt)]);
+
 export const corrections = pgTable("corrections", {
   id: text("id").primaryKey(), recordId: text("record_id").references(() => evidenceRecords.id), requesterContactHash: text("requester_contact_hash"),
   requestText: text("request_text").notNull(), supportingUrl: text("supporting_url"), status: text("status").notNull().default("received"),
