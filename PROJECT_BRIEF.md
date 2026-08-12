@@ -13,7 +13,7 @@ Build a public, politically neutral, source-linked dashboard that covers every I
 
 ## Current release boundary
 
-Version 1.2 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, a manually verified toll-plaza/project seed registry, a read-only editorial migration console, and a privacy-safe loans and schemes navigator. A normalized database schema exists, but no persistent provider, authentication, upload storage or moderation backend is connected. It must not be described as a complete tracker or complete scheme directory.
+Version 1.3 is an attractive responsive website foundation. Its first screen is the India civic-evidence statement, followed immediately by source-linked national GDP and state/UT output, per-capita NSDP coverage, a defined Central Government liabilities-to-reported-assets comparison, and clearly labelled research estimates of wealth distribution. An `All data` menu routes to four topic groups and their subtopics. It also contains verified national snapshots, one official CPCB station feed connected through data.gov.in, an all-36-jurisdiction official annual NCRB/ADSI matrix through data.gov.in, one working non-government public weather-model feed, a transport evidence room, a manually verified toll-plaza/project seed registry, a read-only editorial migration console, and a privacy-safe loans and schemes navigator. A managed Neon Postgres database now stores the reviewed seed model and scheduled source-health records. Authentication, public uploads and moderation remain disconnected. It must not be described as a complete tracker or complete scheme directory.
 
 The economic screen uses MoSPI provisional FY 2025–26 national accounts, the Economic Survey state NSDP table for total jurisdiction output, and RBI Handbook Table 9 for per-capita NSDP at current prices. Selecting a state/UT must update both total and per-capita cards; India values must never remain visible as if they belong to the selected state. Both all-jurisdiction series have 33 published values and three explicit gaps; mixed source years must remain visible and must not be presented as a strict same-year ranking. NSDP is not GSDP or household income. The 2.23× liabilities/assets figure compares ₹196.78 lakh crore of budgeted Central Government liabilities with ₹88.28 lakh crore of reported assets defined as cumulative capital outlay plus loans advanced. It is not a valuation of India’s total national or household wealth. Wealth-group shares are World Inequality Lab research estimates for 2022–23, not an official Government of India series; the top 1% is a subset of the top 10% and must not be added to it.
 
@@ -134,6 +134,17 @@ The production road workflow must:
 - The schema adds schemes, scheme-jurisdiction availability, sourced eligibility rules and application-channel records. CSV export preserves the reviewed seed and its limitations.
 - PM SVANidhi and state-specific loan corporations are future source-review work, not silently omitted claims of non-availability.
 
+## Persistent evidence foundation in v1.3
+
+- Vercel-managed Neon Postgres is connected through server-only environment variables.
+- The 13-table production model covers jurisdictions, sources and source checks, evidence and observations, promises, revisions, reviews, corrections, schemes, eligibility and application channels.
+- The first seed contains 37 jurisdictions, 20 distinct sources, 16 transport evidence records, eight national scheme records, 288 scheme-jurisdiction coverage rows and 24 eligibility rules.
+- `/api/system/status` exposes only connectivity and row counts; it never exposes credentials or database connection details.
+- A daily Vercel Cron job records source reachability, HTTP status, redirect destination and response time. It is protected by a server-only bearer secret.
+- Link-health failure does not remove an evidence record or change a promise verdict automatically.
+- The editorial console displays persistent-system state but remains read-only. Clerk authentication activation is blocked only by the account owner’s required Vercel Marketplace terms acceptance.
+- Next.js and React were upgraded to the latest compatible releases; the production dependency audit reports no known vulnerabilities.
+
 ## Seed sources through v0.8
 
 - Government of India, Budget at a Glance 2025–26.
@@ -149,13 +160,13 @@ No other interface card should display an apparently complete numeric result unt
 
 ## Remaining production steps
 
-1. Provision a persistent database and safely migrate the existing evidence and scheme schema.
-2. Establish an editorial source archive and two-person review for status changes.
+1. Accept Clerk Marketplace terms, activate role-based editorial sign-in and require two-person approval for publication.
+2. Establish an editorial source archive and correction workflow.
 3. Review state loan corporations and department schemes jurisdiction by jurisdiction, beginning with current official eligibility and application routes.
 4. Ingest and review state evidence tables topic by topic, beginning with same-year education, health, CPI and audited public-finance series.
 5. Add state budget and audit-source mapping without promising real-time refresh.
 6. Build the secure citizen-report backend only after privacy, moderation and authority-routing decisions are approved.
-7. Add automated accessibility, broken-link and source-freshness checks.
+7. Add automated accessibility tests and alert delivery for repeated source failures.
 8. Revisit official weather warnings only if legitimate IMD access is approved; do not treat the government-email restriction as a technical problem to bypass.
 
 ## Release constraints

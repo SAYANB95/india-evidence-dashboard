@@ -19,7 +19,12 @@ async function renderInfrastructureRegistry() {
 }
 
 async function renderEditorial() {
-  return readFile(new URL("../.next/server/app/editorial.html", import.meta.url), "utf8");
+  return (await Promise.all([
+    readFile(new URL("../app/editorial/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/editorial/editorial-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../lib/editorial.ts", import.meta.url), "utf8"),
+    readFile(new URL("../data/toll-plazas.json", import.meta.url), "utf8"),
+  ])).join("\n");
 }
 
 async function renderSchemes() {
@@ -92,14 +97,14 @@ test("registry seeds preserve provenance, unique IDs and explicit gaps", async (
   assert.ok(tolls.every((item) => item.carSingle === null || item.carSingle > 0));
 });
 
-test("pre-renders a safe read-only editorial evidence console", async () => {
+test("keeps the database-backed editorial evidence console read only", async () => {
   const html = await renderEditorial();
   assert.match(html, /Evidence needs/);
-  assert.match(html, /Persistent provider not connected/);
-  assert.match(html, /No authentication configured/);
+  assert.match(html, /Persistent storage is now connected/);
+  assert.match(html, /Authentication acceptance pending/);
   assert.match(html, /Seed migration queue/);
   assert.match(html, /Second-person approval/);
-  assert.match(html, /Haladgaon fee plaza/);
+  assert.match(html, /Haladgaon/);
   assert.doesNotMatch(html, /Save changes|Publish now|Delete record/i);
 });
 
@@ -133,4 +138,13 @@ test("database migrations include schemes, jurisdiction coverage and application
     assert.ok(sql.includes(`CREATE TABLE \`${table}\``), `migration must create ${table}`);
   }
   assert.match(sql, /scheme_jurisdiction_unique/);
+});
+
+test("Postgres migration creates the persistent evidence and freshness model", async () => {
+  const sql = await readFile(new URL("../drizzle-pg/0000_small_rictor.sql", import.meta.url), "utf8");
+  for (const table of ["jurisdictions", "sources", "evidence_records", "observations", "schemes", "scheme_jurisdictions", "eligibility_rules", "application_channels", "source_checks"]) {
+    assert.ok(sql.includes(`CREATE TABLE "${table}"`), `Postgres migration must create ${table}`);
+  }
+  assert.match(sql, /record_revision_unique/);
+  assert.match(sql, /source_url_unique/);
 });

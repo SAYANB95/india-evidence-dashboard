@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Evidence = {
   status: "available";
@@ -12,6 +13,7 @@ type Evidence = {
 const value = (number: number | null) => number == null ? "Data gap" : number.toLocaleString("en-IN");
 
 export default function StateEvidenceClient({ jurisdiction, slug }: { jurisdiction:string; slug:string }) {
+  const router=useRouter();
   const [evidence,setEvidence] = useState<Evidence|null>(null);
   const [failed,setFailed] = useState(false);
   useEffect(() => { let live=true; fetch(`/api/evidence/state?jurisdiction=${encodeURIComponent(jurisdiction)}`)
@@ -19,7 +21,7 @@ export default function StateEvidenceClient({ jurisdiction, slug }: { jurisdicti
     .then((data) => { if(live) setEvidence(data); }).catch(() => { if(live) setFailed(true); }); return () => { live=false; }; }, [jurisdiction]);
 
   const download = () => {
-    window.location.href = `/api/evidence/export?jurisdiction=${encodeURIComponent(jurisdiction)}&slug=${slug}`;
+    router.push(`/api/evidence/export?jurisdiction=${encodeURIComponent(jurisdiction)}&slug=${slug}`);
   };
 
   return <section className="record-section safety-record" id="safety">

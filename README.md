@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.2 adds a source-reviewed loans and schemes navigator, jurisdiction-aware discovery and a normalized scheme data model to the existing evidence platform. It is **not** a connected production database, a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.3 connects a production Postgres evidence store, migrates the reviewed seeds, adds machine-readable system status and schedules source-link freshness checks. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -121,6 +121,14 @@ Matching uses only broad selections in the browser. It collects no Aadhaar numbe
 The state selector means that the reviewed national routes are available for discovery from that jurisdiction; it does not claim that every state-government programme has been loaded. State corporation, department and local implementing-agency catalogues remain an explicit data gap, with the official [myScheme](https://www.myscheme.gov.in/) State/UT finder provided as the current public doorway. Stand-Up India is retained as a clearly labelled legacy record because its official page says that version ran through 31 March 2025 and a successor was under preparation; the dashboard provides no stale application button.
 
 The schema now also defines `schemes`, `scheme_jurisdictions`, `eligibility_rules` and `application_channels`. `/api/schemes/export` provides the reviewed seed as CSV. PM SVANidhi and individual state programmes require a fresh official source and status review before inclusion; absence from this small catalogue does not mean absence of support.
+
+## Persistent evidence foundation in v1.3
+
+The Vercel project now has a managed Neon Postgres resource. The committed Postgres migration defines 13 tables for jurisdictions, sources, evidence records, observations, promises, revisions, reviews, corrections, schemes, jurisdiction coverage, eligibility rules, application channels and append-only source checks. The first production seed contains 37 jurisdiction rows, 20 distinct sources, 16 reviewed transport evidence records, eight national scheme records, 288 scheme-jurisdiction coverage rows and 24 published eligibility conditions.
+
+`/api/system/status` reports database connectivity and row counts without exposing credentials. A protected Vercel Cron endpoint checks every stored source daily, records response status and duration, and updates the source health state. Access-restricted or anti-bot responses remain distinct from confirmed unavailable pages. The cron route requires `CRON_SECRET`; it cannot be triggered anonymously. A failed link check changes link-health metadata—it does not delete evidence or silently change a public verdict.
+
+The editorial console reads the production system state but remains intentionally read-only. Clerk was selected for role-based editorial authentication, but its Vercel Marketplace terms must be accepted by the account owner before sign-in and write controls can be activated. No temporary password, public write API or authentication bypass is included.
 
 ## Visual system
 
