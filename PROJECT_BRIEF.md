@@ -169,7 +169,7 @@ No other interface card should display an apparently complete numeric result unt
 
 ## Remaining production steps
 
-1. Assign the first named Clerk editor/reviewer/publisher accounts and test the two-person publication path with real editorial users.
+1. Replace the claimed Clerk development instance with production keys, then assign the first named editor/reviewer/publisher accounts and test the two-person publication path with real editorial users.
 2. Establish an editorial source archive and correction workflow.
 3. Review state loan corporations and department schemes jurisdiction by jurisdiction, beginning with current official eligibility and application routes.
 4. Ingest and review state evidence tables topic by topic, beginning with same-year education, health, CPI and audited public-finance series.
@@ -180,4 +180,4 @@ No other interface card should display an apparently complete numeric result unt
 
 ## Release constraints
 
-The website is published at [india-evidence-dashboard-public.vercel.app](https://india-evidence-dashboard-public.vercel.app/). Do not add private credentials, imply official endorsement, or enable real uploads without explicit approval. Keep all prototype and data-gap labels visible. CPCB and data.gov.in evidence routes use the server-only `DATA_GOV_IN_API_KEY`, stored as a Vercel Sensitive production variable and never exposed to browser code.
+The website is published at [india-evidence-dashboard-public.vercel.app](https://india-evidence-dashboard-public.vercel.app/). Do not add private credentials, imply official endorsement, or enable real uploads without explicit approval. Keep all prototype and data-gap labels visible. CPCB and data.gov.in evidence routes use the server-only `DATA_GOV_IN_API_KEY`, stored as a Vercel Sensitive production variable and never exposed to browser code. The current Clerk Marketplace resource is a development instance; keep editorial onboarding disabled until production Clerk keys are installed and the authenticated workflow is re-verified.

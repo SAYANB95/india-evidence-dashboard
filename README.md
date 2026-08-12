@@ -135,6 +135,8 @@ The public editorial console remains intentionally read-only. Clerk protects the
 
 Clerk is connected through Vercel Marketplace environment variables. Session context is attached only to the protected manager and review API, while both resources enforce authorization again internally so public evidence requests do not depend on the identity provider. `/editorial/manage` redirects unauthenticated visitors to `/sign-in`; authenticated users without an approved metadata role see an access-pending screen and cannot submit actions. Editors and reviewers can record source and definition reviews. Publishers can perform those stages and may approve publication only after the two-person prerequisite is satisfied.
 
+The claimed Marketplace resource currently supplies a Clerk **development instance**. The public dashboard may remain online, but named editorial users must not be onboarded until the Vercel production environment has been changed to Clerk production keys and the signed-in two-person workflow has been re-tested. No development key is committed to this repository.
+
 To authorize a named account, set its Clerk `publicMetadata` to one of the following in the Clerk user dashboard: `{ "role": "editor" }`, `{ "role": "reviewer" }` or `{ "role": "publisher" }`. A publisher account alone is deliberately insufficient to publish its own unreviewed record.
 
 ## Visual system
