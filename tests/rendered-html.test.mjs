@@ -97,15 +97,31 @@ test("registry seeds preserve provenance, unique IDs and explicit gaps", async (
   assert.ok(tolls.every((item) => item.carSingle === null || item.carSingle > 0));
 });
 
-test("keeps the database-backed editorial evidence console read only", async () => {
+test("keeps the public editorial evidence console read only", async () => {
   const html = await renderEditorial();
   assert.match(html, /Evidence needs/);
-  assert.match(html, /Persistent storage is now connected/);
-  assert.match(html, /Authentication acceptance pending/);
+  assert.match(html, /Persistent storage and protected editorial sign-in are connected/);
+  assert.match(html, /Clerk role-gated sign-in active/);
   assert.match(html, /Seed migration queue/);
   assert.match(html, /Second-person approval/);
   assert.match(html, /Haladgaon/);
   assert.doesNotMatch(html, /Save changes|Publish now|Delete record/i);
+});
+
+test("protects editorial actions with roles, audit revisions and a second-person gate", async () => {
+  const files = (await Promise.all([
+    readFile(new URL("../proxy.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/editor-auth.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/editorial/reviews/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/editorial/manage/page.tsx", import.meta.url), "utf8"),
+  ])).join("\n");
+  assert.match(files, /clerkMiddleware/);
+  assert.match(files, /redirect\("\/sign-in/);
+  assert.match(files, /editor|reviewer|publisher/);
+  assert.match(files, /different user/);
+  assert.match(files, /db\.insert\(reviews\)/);
+  assert.match(files, /db\.insert\(revisions\)/);
+  assert.doesNotMatch(files, /temporary password|auth bypass/i);
 });
 
 test("pre-renders the privacy-safe loans and schemes navigator", async () => {

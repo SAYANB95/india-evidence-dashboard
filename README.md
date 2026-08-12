@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.3 connects a production Postgres evidence store, migrates the reviewed seeds, adds machine-readable system status and schedules source-link freshness checks. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.4 connects a production Postgres evidence store, protected Clerk editorial identities, role-checked review actions, immutable revision entries and a second-person publication gate. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -13,7 +13,8 @@ This repository is a public-safe website foundation. Version 1.3 connects a prod
 - downloadable CSV manifests containing period, status, definition, limitation and source;
 - `/infrastructure`, separating highway construction, maintenance, NHAI debt, toll collection, railway network/traffic/safety, aviation coverage and bounded audit findings;
 - `/infrastructure/registry`, an interactive verified seed register of eight NHTIS toll plazas and eight road, rail and aviation projects/programmes, with filters, expandable evidence and CSV exports;
-- `/editorial`, a deliberately read-only, non-indexed preview of the evidence migration queue, normalized data model and publication gates;
+- `/editorial`, a deliberately read-only, non-indexed public view of the evidence migration queue, normalized data model and publication gates;
+- `/editorial/manage`, a Clerk-protected workspace for named editors, reviewers and publishers;
 - an `All data` directory with economy, people/services, safety/infrastructure and accountability subtopics;
 - a selected-jurisdiction total-output card using the latest available official NSDP value for 33 jurisdictions, with three explicit gaps;
 - an economy-first screen with MoSPI national GDP and GDP per capita, RBI per-capita NSDP for 33 of 36 current jurisdictions, a defined Central Government liabilities-to-reported-assets comparison, and a clearly labelled research estimate of wealth distribution;
@@ -128,7 +129,13 @@ The Vercel project now has a managed Neon Postgres resource. The committed Postg
 
 `/api/system/status` reports database connectivity and row counts without exposing credentials. A protected Vercel Cron endpoint checks every stored source daily, records response status and duration, and updates the source health state. Access-restricted or anti-bot responses remain distinct from confirmed unavailable pages. The cron route requires `CRON_SECRET`; it cannot be triggered anonymously. A failed link check changes link-health metadata—it does not delete evidence or silently change a public verdict.
 
-The editorial console reads the production system state but remains intentionally read-only. Clerk was selected for role-based editorial authentication, but its Vercel Marketplace terms must be accepted by the account owner before sign-in and write controls can be activated. No temporary password, public write API or authentication bypass is included.
+The public editorial console remains intentionally read-only. Clerk protects the separate manager route and review API. Roles are stored in Clerk public metadata as `editor`, `reviewer` or `publisher`; every action is validated again on the server and written to both the review and revision audit tables. Publication approval is limited to publishers and requires approved source and definition reviews, including an approval from a different authenticated user. No temporary password, public write API or authentication bypass is included.
+
+## Protected editorial workflow in v1.4
+
+Clerk is connected through Vercel Marketplace environment variables. Session context is attached only to the protected manager and review API, while both resources enforce authorization again internally so public evidence requests do not depend on the identity provider. `/editorial/manage` redirects unauthenticated visitors to `/sign-in`; authenticated users without an approved metadata role see an access-pending screen and cannot submit actions. Editors and reviewers can record source and definition reviews. Publishers can perform those stages and may approve publication only after the two-person prerequisite is satisfied.
+
+To authorize a named account, set its Clerk `publicMetadata` to one of the following in the Clerk user dashboard: `{ "role": "editor" }`, `{ "role": "reviewer" }` or `{ "role": "publisher" }`. A publisher account alone is deliberately insufficient to publish its own unreviewed record.
 
 ## Visual system
 

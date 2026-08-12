@@ -6,15 +6,15 @@ import EditorialClient from "./editorial-client";
 
 export const metadata:Metadata={
   title:"Editorial evidence console — India Evidence Dashboard",
-  description:"Read-only preview of the evidence review, revision and publication workflow.",
+  description:"Public view of the evidence review, revision and publication workflow.",
   robots:{index:false,follow:false},
 };
 
 export const dynamic="force-dynamic";
 
 export default async function EditorialPage(){const system=await getSystemStatus();return <main className="editorial-shell">
-  <header className="record-header"><a className="record-brand" href="/"><span className="brand-mark"/><b>India Evidence <em>Dashboard</em></b></a><nav><a href="#queue">Review queue</a><a href="#model">Evidence model</a><a href="#policy">Publication gate</a></nav><a className="record-compare" href="/infrastructure/registry">Public registry</a></header>
-  <section className="editorial-hero"><p className="eyebrow">Internal-system preview · read only</p><h1>Evidence needs<br/><span>a chain of custody.</span></h1><p>This console turns individual dashboard cards into reviewable records with sources, definitions, gaps, revisions and approval gates. Persistent storage is now connected; write and publish controls remain disabled until protected sign-in and role review are activated.</p><div className="editorial-system-state"><i/><b>Postgres {system.database}</b><span>{system.jurisdictions || 37} jurisdiction rows</span><span>{system.sources || editorialStats.sources} source rows</span><span>Authentication acceptance pending</span><span>Public data unchanged</span></div></section>
+  <header className="record-header"><a className="record-brand" href="/"><span className="brand-mark"/><b>India Evidence <em>Dashboard</em></b></a><nav><a href="#queue">Review queue</a><a href="#model">Evidence model</a><a href="#policy">Publication gate</a></nav><a className="record-compare" href="/editorial/manage">Editorial sign-in</a></header>
+  <section className="editorial-hero"><p className="eyebrow">Public workflow record · read only</p><h1>Evidence needs<br/><span>a chain of custody.</span></h1><p>This public console shows how dashboard records retain sources, definitions, gaps, revisions and approval gates. Persistent storage and protected editorial sign-in are connected; write actions exist only inside the role-gated manager.</p><div className="editorial-system-state"><i/><b>Postgres {system.database}</b><span>{system.jurisdictions || 37} jurisdiction rows</span><span>{system.sources || editorialStats.sources} source rows</span><span>Clerk role-gated sign-in active</span><span>Public data remains read only</span></div></section>
   <section className="editorial-summary" aria-label="Editorial migration summary">
     <article><span>Seed records</span><strong>{editorialStats.records}</strong><p>Existing verified toll and infrastructure records mapped into the normalized model.</p></article>
     <article><span>Distinct source URLs</span><strong>{editorialStats.sources}</strong><p>Duplicate source pages remain one source entity with multiple evidence records.</p></article>
