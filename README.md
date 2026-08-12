@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.8 adds reviewed UDISE+ 2023-24 education and SRS 2023 vital-statistics packs for all 36 jurisdictions, an all-state comparison/export route, and a searchable, source-linked freedom-movement people and primary-document library. It also retains the production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, second-person publication gate, complete 46-domain evidence catalogue, public operations transparency, and privacy-minimised correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 1.9 adds reviewed public-system bed capacity across PHC, CHC, sub-district hospital, district hospital and medical-college categories for all 36 jurisdictions to the v1.8 education and vital-statistics packs, all-state comparison/export route, and searchable history library. It also retains the production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, second-person publication gate, complete 46-domain evidence catalogue, public operations transparency, and privacy-minimised correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -12,7 +12,7 @@ This repository is a public-safe website foundation. Version 1.8 adds reviewed U
 - `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;
 - `/catalog`, a searchable implementation ledger defining all 46 in-scope economy, finance, people, education, health, services, safety, justice, infrastructure, agriculture, environment, governance and historical evidence domains;
 - `/history`, a document-first archive with initial dossiers on district freedom fighters, Subhas Chandra Bose and the INA, Savarkar's clemency petitions, and controversies concerning Syama Prasad Mookerjee;
-- `/state-packs`, a searchable and sortable all-36 table of official UDISE+ school, enrolment and teacher counts plus SRS birth, death and infant-mortality estimates, with CSV export and source-period warnings;
+- `/state-packs`, a searchable and sortable all-36 table of official UDISE+ education counts, SRS vital-statistics estimates and Health Dynamics public-system bed capacity, with CSV export and source-period warnings;
 - a searchable reviewed history seed containing 12 freedom-movement people from multiple regions and five primary-document doorways; this is a starting register, not a complete national list;
 - the same 46-domain ledger on every state and UT page, so no jurisdiction silently loses a category when its numeric evidence is missing;
 - `/operations`, a public-safe register of stored coverage, source health, running connectors, periodic releases and held production gates;
@@ -41,7 +41,7 @@ This repository is a public-safe website foundation. Version 1.8 adds reviewed U
 
 ## Scope completion in v1.6
 
-The product taxonomy is complete for the agreed civic-evidence scope: 46 domains are defined, grouped, source-mapped, assigned a refresh pattern and displayed uniformly for all 36 jurisdictions. Thirteen domains now have loaded or connected evidence; every other source doorway, editorial queue and explicit data gap remains visible. These coverage labels describe this dashboard, not the importance or performance of a state or government.
+The product taxonomy is complete for the agreed civic-evidence scope: 46 domains are defined, grouped, source-mapped, assigned a refresh pattern and displayed uniformly for all 36 jurisdictions. Fourteen domains now have loaded or connected evidence; every other source doorway, editorial queue and explicit data gap remains visible. These coverage labels describe this dashboard, not the importance or performance of a state or government.
 
 ## Freedom movement and contested history in v1.7
 
@@ -54,6 +54,10 @@ Category completion is not data fabrication. A domain can be fully represented i
 Every state and union-territory record now includes the same reviewed UDISE+ 2023-24 measures: schools, enrolments, teachers, pupil-teacher ratio, zero-enrolment schools and single-teacher schools. It also includes SRS 2023 birth and death rates and infant-mortality estimates; for smaller jurisdictions, the source's 2021-23 pooled IMR period remains visible. `/state-packs` compares and exports these 36 records. Sort order is exploratory, not a ranking, and administrative school counts do not measure learning quality.
 
 `/history` now adds a searchable 12-person reviewed seed and five document records beneath the archive's methodology. Present-day state filters are discovery aids, not claims about historical borders or exclusive ownership. A complete district-level freedom-movement register remains future editorial work and is not implied by these seeds.
+
+## Public-system bed capacity in v1.9
+
+Every state and UT pack includes the Health Dynamics of India 2022-23 bed table as on 31 March 2023. The source reports 8,18,661 beds across PHC, CHC, sub-district hospital, district hospital and medical-college categories; the jurisdiction rows reconcile to that published India total. Source `NA` values stay blank in CSV and appear as `NA` in context. These are reported public-system capacity figures—not private-sector beds, current vacancy or a real-time emergency feed.
 
 The correction API requires same-origin JSON, a bounded body, a server-only HMAC salt, persistent anonymous rate limits, an evidence-only attestation and an optional credential-free HTTPS source. It stores a random receipt and the correction text, not raw IP addresses or contact information.
 

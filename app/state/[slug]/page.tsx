@@ -6,6 +6,7 @@ import { evidenceCatalog } from "../../../lib/catalog";
 import StateEvidenceClient from "./state-evidence-client";
 import JurisdictionSelect from "./jurisdiction-select";
 import { educationByJurisdiction, statePackSources, vitalByJurisdiction } from "../../../lib/state-packs";
+import { healthBedsByJurisdiction, healthBedsSource } from "../../../lib/health-beds";
 
 export function generateStaticParams() {
   return jurisdictions.map(({ slug }) => ({ slug }));
@@ -22,6 +23,7 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
   const economic = economy[item.name] || {};
   const education = educationByJurisdiction[item.name];
   const vital = vitalByJurisdiction[item.name];
+  const healthBeds = healthBedsByJurisdiction[item.name];
 
   return <main className="record-shell">
     <header className="record-header">
@@ -44,7 +46,7 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
     </section>
 
     <section className="record-section state-pack" id="people-services">
-      <div className="record-section-head"><div><p className="eyebrow">State evidence pack · official periodic data</p><h2>Schools and vital statistics</h2></div><p>These are source-period snapshots, not live counters. The same definitions are applied to every state and union territory.</p></div>
+      <div className="record-section-head"><div><p className="eyebrow">State evidence pack · official periodic data</p><h2>Schools, vital statistics and public beds</h2></div><p>These are source-period snapshots, not live counters. The same definitions are applied to every state and union territory.</p></div>
       <div className="state-pack-grid">
         <article><span>Recognised schools</span><strong>{education.schools.toLocaleString("en-IN")}</strong><b>UDISE+ 2023-24</b><p>All management categories reported in the source table.</p></article>
         <article><span>School enrolments</span><strong>{education.enrolments.toLocaleString("en-IN")}</strong><b>UDISE+ 2023-24</b><p>Student records in the source reporting system; not a population census.</p></article>
@@ -52,8 +54,9 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
         <article className="vital-card"><span>Birth rate</span><strong>{vital.birthRate.toFixed(1)}<small> / 1,000</small></strong><b>SRS 2023</b><p>Estimated live births per 1,000 population.</p></article>
         <article className="vital-card"><span>Death rate</span><strong>{vital.deathRate.toFixed(1)}<small> / 1,000</small></strong><b>SRS 2023</b><p>Estimated deaths per 1,000 population.</p></article>
         <article className="vital-card"><span>Infant mortality rate</span><strong>{vital.infantMortalityRate}<small> / 1,000</small></strong><b>{vital.imrPeriod}</b><p>Infant deaths per 1,000 live births. Smaller-state/UT estimates use a three-year period.</p></article>
+        <article className="health-card"><span>Reported public-system beds</span><strong>{healthBeds.totalBeds.toLocaleString("en-IN")}</strong><b>31 March 2023</b><p>PHC {healthBeds.phc.toLocaleString("en-IN")} · CHC {healthBeds.chc?.toLocaleString("en-IN") ?? "NA"} · district hospital {healthBeds.districtHospital.toLocaleString("en-IN")} · medical college {healthBeds.medicalCollege?.toLocaleString("en-IN") ?? "NA"}.</p></article>
       </div>
-      <div className="state-pack-sources"><a href={statePackSources.education.url} target="_blank" rel="noreferrer"><b>{statePackSources.education.label} ↗</b><span>{statePackSources.education.limitation}</span></a><a href={statePackSources.vital.url} target="_blank" rel="noreferrer"><b>{statePackSources.vital.label} ↗</b><span>{statePackSources.vital.limitation}</span></a></div>
+      <div className="state-pack-sources"><a href={statePackSources.education.url} target="_blank" rel="noreferrer"><b>{statePackSources.education.label} ↗</b><span>{statePackSources.education.limitation}</span></a><a href={statePackSources.vital.url} target="_blank" rel="noreferrer"><b>{statePackSources.vital.label} ↗</b><span>{statePackSources.vital.limitation}</span></a><a href={healthBedsSource.url} target="_blank" rel="noreferrer"><b>{healthBedsSource.label} ↗</b><span>{healthBedsSource.limitation}</span></a></div>
     </section>
 
     <StateEvidenceClient jurisdiction={item.name} slug={item.slug}/>
