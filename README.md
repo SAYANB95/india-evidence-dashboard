@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 2.0 adds the official NHM MIS operational ambulance fleet across ALS, BLS, patient-transport, boat, bike and other categories for all 36 jurisdictions to the v1.9 education, vital-statistics and public-bed packs. It also retains the all-state comparison/export route, searchable history library, production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, second-person publication gate, complete 46-domain evidence catalogue, public operations transparency, and privacy-minimised correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 2.2 expands the history route with a four-source national register map, 29 individually reviewed freedom-movement profiles, six source-linked event records, and the complete published Cellular Jail province aggregate. It also retains the official NHM MIS operational ambulance fleet across ALS, BLS, patient-transport, boat, bike and other categories for all 36 jurisdictions, all-state comparison/export, production Postgres evidence storage and protected editorial workflows. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -13,8 +13,9 @@ This repository is a public-safe website foundation. Version 2.0 adds the offici
 - `/catalog`, a searchable implementation ledger defining all 46 in-scope economy, finance, people, education, health, services, safety, justice, infrastructure, agriculture, environment, governance and historical evidence domains;
 - `/history`, a document-first archive with initial dossiers on district freedom fighters, Subhas Chandra Bose and the INA, Savarkar's clemency petitions, and controversies concerning Syama Prasad Mookerjee;
 - `/state-packs`, a searchable and sortable all-36 table of official UDISE+ education counts, SRS vital-statistics estimates and Health Dynamics public-system bed capacity, with CSV export and source-period warnings;
-- a searchable reviewed history seed containing 12 freedom-movement people from multiple regions and five primary-document doorways; this is a starting register, not a complete national list;
-- the Ministry of Culture's complete published Cellular Jail province table for 585 recorded revolutionaries jailed in 1909–1938, including 398 from undivided Bengal; this official aggregate is kept separate from the 12 individually reviewed profile cards and is not a count of every freedom-struggle participant;
+- a searchable reviewed history register containing 29 freedom-movement people from multiple regions, six event records and five primary-document doorways; this is an expanding reviewed register, not a complete national list;
+- a source map separating the Dictionary of Martyrs, Digital District Repository, Swatantrata Sainik Samman recognition records and Cellular Jail table, because their populations overlap and their totals cannot be added;
+- the Ministry of Culture's complete published Cellular Jail province table for 585 recorded revolutionaries jailed in 1909–1938, including 398 from undivided Bengal; this official aggregate is kept separate from the individually reviewed profile cards and is not a count of every freedom-struggle participant;
 - the same 46-domain ledger on every state and UT page, so no jurisdiction silently loses a category when its numeric evidence is missing;
 - `/operations`, a public-safe register of stored coverage, source health, running connectors, periodic releases and held production gates;
 - `/corrections`, a stored public correction pathway that collects no name, email, phone, image or location and never changes published evidence automatically;
@@ -54,7 +55,7 @@ Category completion is not data fabrication. A domain can be fully represented i
 
 Every state and union-territory record now includes the same reviewed UDISE+ 2023-24 measures: schools, enrolments, teachers, pupil-teacher ratio, zero-enrolment schools and single-teacher schools. It also includes SRS 2023 birth and death rates and infant-mortality estimates; for smaller jurisdictions, the source's 2021-23 pooled IMR period remains visible. `/state-packs` compares and exports these 36 records. Sort order is exploratory, not a ranking, and administrative school counts do not measure learning quality.
 
-`/history` now adds a searchable 12-person reviewed seed and five document records beneath the archive's methodology. Present-day state filters are discovery aids, not claims about historical borders or exclusive ownership. A complete district-level freedom-movement register remains future editorial work and is not implied by these seeds.
+`/history` now adds a searchable 29-person reviewed register, six event records and five document records beneath the archive's methodology. The event register starts with Jallianwala Bagh, Kakori, Chittagong, Writers' Building, the executions of Bhagat Singh, Rajguru and Sukhdev, and the 1946 Royal Indian Navy uprising. Geographic filters are discovery aids, not claims about historical borders or exclusive ownership. A complete district-level freedom-movement register remains future editorial work and is not implied by these reviewed records.
 
 ## Public-system bed capacity in v1.9
 

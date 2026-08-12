@@ -121,6 +121,13 @@ test("pre-renders a document-first freedom movement and contested-history archiv
   assert.match(history,/585(?:<!-- -->)? people/);
   assert.match(history,/not the number of freedom fighters from this jurisdiction/i);
   assert.match(history,/Open the parliamentary answer/);
+  assert.match(history,/No single list contains everyone/);
+  assert.match(history,/13,500 martyrs/);
+  assert.match(history,/Jallianwala Bagh massacre/);
+  assert.match(history,/Bhagat Singh/);
+  assert.match(history,/Khudiram Bose/);
+  assert.match(history,/Pritilata Waddedar/);
+  assert.match(history,/Royal Indian Navy uprising/);
   assert.match(history,/Velu Nachiyar/);
   assert.match(history,/U Tirot Sing/);
   assert.match(history,/What the document proves/);
