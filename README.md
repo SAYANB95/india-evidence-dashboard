@@ -2,7 +2,7 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 1.9 adds reviewed public-system bed capacity across PHC, CHC, sub-district hospital, district hospital and medical-college categories for all 36 jurisdictions to the v1.8 education and vital-statistics packs, all-state comparison/export route, and searchable history library. It also retains the production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, second-person publication gate, complete 46-domain evidence catalogue, public operations transparency, and privacy-minimised correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 2.0 adds the official NHM MIS operational ambulance fleet across ALS, BLS, patient-transport, boat, bike and other categories for all 36 jurisdictions to the v1.9 education, vital-statistics and public-bed packs. It also retains the all-state comparison/export route, searchable history library, production Postgres evidence store, protected editorial identities, role-checked review actions, immutable revision entries, second-person publication gate, complete 46-domain evidence catalogue, public operations transparency, and privacy-minimised correction requests. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
@@ -58,6 +58,8 @@ Every state and union-territory record now includes the same reviewed UDISE+ 202
 ## Public-system bed capacity in v1.9
 
 Every state and UT pack includes the Health Dynamics of India 2022-23 bed table as on 31 March 2023. The source reports 8,18,661 beds across PHC, CHC, sub-district hospital, district hospital and medical-college categories; the jurisdiction rows reconcile to that published India total. Source `NA` values stay blank in CSV and appear as `NA` in context. These are reported public-system capacity figures—not private-sector beds, current vacancy or a real-time emergency feed.
+
+Version 2.0 also includes the NHM MIS ambulance fleet reported available and operational as on 30 June 2024. The 36 jurisdiction records reconcile to Annexure A totals of 28,830 vehicles: 3,044 ALS, 15,283 BLS, 3,918 patient-transport, 19 boat, 81 bike and 6,485 other vehicles. This is periodic programme capacity—not a live GPS/dispatch feed, current vehicle availability, response time or every public/private ambulance. The data.gov.in resource has a downloadable CSV but explicitly reports that no Data API exists.
 
 The correction API requires same-origin JSON, a bounded body, a server-only HMAC salt, persistent anonymous rate limits, an evidence-only attestation and an optional credential-free HTTPS source. It stores a random receipt and the correction text, not raw IP addresses or contact information.
 

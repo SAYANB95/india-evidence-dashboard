@@ -976,6 +976,6 @@ footer > div:last-child,
 @media(max-width:600px){.packs-hero{padding:58px 20px}.packs-hero h1{font-size:60px}.packs-body{padding:0 20px 58px}.packs-controls{grid-template-columns:1fr}.packs-count span{display:block;float:none;margin-top:7px}.packs-method{grid-template-columns:1fr}.packs-method article{border-right:0;border-bottom:1px solid rgba(255,255,255,.16)}}
 
 /* Public-system bed capacity additions */
-.state-pack-grid article.health-card{background:#e9f0ec}.state-pack-sources{grid-template-columns:repeat(3,1fr)}.state-pack-sources a:nth-child(2){background:#143d37}.state-pack-sources a:last-child{background:#12314f}.packs-method{grid-template-columns:repeat(3,1fr)}
+.state-pack-grid article.health-card{background:#e9f0ec}.state-pack-grid article.ambulance-card{background:#e8eef7}.state-pack-sources{grid-template-columns:repeat(4,1fr)}.state-pack-sources a:nth-child(2){background:#143d37}.state-pack-sources a:nth-child(3){background:#12314f}.state-pack-sources a:last-child{background:#224f82}.packs-method{grid-template-columns:repeat(4,1fr)}
 @media(max-width:1000px){.packs-method{grid-template-columns:1fr}}
 @media(max-width:600px){.state-pack-sources{grid-template-columns:1fr}}
