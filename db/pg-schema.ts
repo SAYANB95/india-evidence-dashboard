@@ -55,6 +55,12 @@ export const publicActionAttempts = pgTable("public_action_attempts", {
   attemptedAt: text("attempted_at").notNull(),
 }, table => [index("public_attempt_actor_time_idx").on(table.actorHash, table.attemptedAt)]);
 
+export const visitorSessions = pgTable("visitor_sessions", {
+  visitorHash: text("visitor_hash").primaryKey(),
+  firstSeenAt: text("first_seen_at").notNull(),
+  lastSeenAt: text("last_seen_at").notNull(),
+}, table => [index("visitor_last_seen_idx").on(table.lastSeenAt)]);
+
 export const corrections = pgTable("corrections", {
   id: text("id").primaryKey(), recordId: text("record_id").references(() => evidenceRecords.id), requesterContactHash: text("requester_contact_hash"),
   requestText: text("request_text").notNull(), supportingUrl: text("supporting_url"), status: text("status").notNull().default("received"),

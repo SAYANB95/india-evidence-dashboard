@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import VisitorCounter from "./visitor-counter";
 
 const states = [
   "Andhra Pradesh",
@@ -529,6 +530,8 @@ export default function Home() {
       <div className="topline">
         <span><i /> <b lang="hi">भारत</b> / India · Independent civic-data prototype</span>
       </div>
+
+      <VisitorCounter />
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label="India Evidence Dashboard home">

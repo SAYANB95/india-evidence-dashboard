@@ -69,3 +69,22 @@ test("public corrections are bounded, privacy-minimised and persistently rate li
   assert.doesNotMatch(route,/requesterContactHash|email|phone/);
   assert.doesNotMatch(route,/error\.message|error\.stack/);
 });
+
+test("public visitor count is same-origin, bot-filtered and privacy-minimised",async()=>{
+  const [route,migration]=await Promise.all([
+    read("../app/api/visitors/route.ts"),
+    read("../drizzle-pg/0003_bitter_dark_phoenix.sql"),
+  ]);
+  assert.match(route,/origin === new URL\(request\.url\)\.origin/);
+  assert.match(route,/sec-fetch-site/);
+  assert.match(route,/createHash\("sha256"\)/);
+  assert.match(route,/randomUUID\(\)/);
+  assert.match(route,/httpOnly: true/);
+  assert.match(route,/sameSite: "lax"/);
+  assert.match(route,/bot\|crawler\|spider/);
+  assert.match(route,/private, no-store/);
+  assert.doesNotMatch(route,/x-forwarded-for|cf-connecting-ip/);
+  assert.match(migration,/CREATE TABLE "visitor_sessions"/);
+  assert.match(migration,/CREATE INDEX "visitor_last_seen_idx"/);
+  assert.doesNotMatch(migration,/ip_address|user_agent/);
+});

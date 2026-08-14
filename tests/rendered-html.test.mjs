@@ -43,6 +43,10 @@ test("server-renders the India Evidence Dashboard", async () => {
   const html = await render();
   assert.match(html, /<title>India Evidence Dashboard/);
   assert.match(html, /What can be proved/);
+  assert.match(html, /Live public traffic/i);
+  assert.match(html, /Active browsers/);
+  assert.match(html, /Anonymous visitors recorded/);
+  assert.match(html, /No names or raw IP addresses are stored/);
   assert.match(html, /All data/);
   assert.match(html, /GDP, state output/);
   assert.match(html, /36/);

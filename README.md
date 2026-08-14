@@ -4,6 +4,8 @@ India Evidence Dashboard is an independent, politically neutral civic-data proto
 
 This repository is a public-safe website foundation. Version 2.3 adds a source-linked 80th Independence Day edition covering national and all-36-jurisdiction NCRB evidence on crimes against women, rape, girl-child POCSO cases and SC/ST atrocities; national NFHS and UDISE+ context; and an explicit POSH/ICC publication gap. Version 2.2 expanded the history route with a four-source national register map, 29 individually reviewed freedom-movement profiles, six source-linked event records, and the complete published Cellular Jail province aggregate. The dashboard is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
+The homepage includes a public traffic counter backed by managed Postgres. “Active” means an anonymous browser seen within the last five minutes; the lifetime figure starts when this feature is deployed and is not reconstructed from older analytics. The server stores only a SHA-256 hash of a random first-party cookie plus first/last-seen timestamps—no names, account IDs, raw IP addresses or user-agent strings. Cleared cookies and additional devices may count again, so the figure is explicitly labelled browsers rather than verified individual people.
+
 ## What the prototype includes
 
 - all 36 jurisdictions in the navigation and data model;

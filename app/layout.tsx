@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import { VisitorTracker } from "./visitor-counter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased"><a className="skip-link" href="#main-content">Skip to main content</a><ClerkProvider><div id="main-content">{children}</div></ClerkProvider></body>
+      <body className="antialiased"><a className="skip-link" href="#main-content">Skip to main content</a><ClerkProvider><VisitorTracker /><div id="main-content">{children}</div></ClerkProvider></body>
     </html>
   );
 }
