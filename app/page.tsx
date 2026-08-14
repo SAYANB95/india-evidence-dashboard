@@ -556,6 +556,12 @@ export default function Home() {
         <div className="data-menu-grid">{dataMenu.map((group) => <section key={group.title}><h3>{group.title}</h3>{group.links.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}<span>→</span></a>)}</section>)}</div>
       </aside>}
 
+      <section className="independence-banner" aria-label="80th Independence Day evidence edition">
+        <div className="mini-flag" aria-hidden="true"><i/><span>✺</span><b/></div>
+        <div><p>15 AUGUST 2026 · 79 YEARS COMPLETED</p><h2>Happy 80th Independence Day.</h2><span>Where are we—and are we moving in a better direction or a worse one?</span></div>
+        <a href="/independence-day">Open the Independence Day evidence edition →</a>
+      </section>
+
       <section className="hero" id="top">
         <div className="hero-copy">
           <div className="india-identity"><span lang="hi">भारत</span><i /><b>INDIA EVIDENCE LEDGER</b></div>

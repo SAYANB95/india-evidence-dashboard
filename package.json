@@ -1,6 +1,6 @@
 {
   "name": "india-evidence-dashboard",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"

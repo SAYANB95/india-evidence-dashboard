@@ -2,11 +2,12 @@
 
 India Evidence Dashboard is an independent, politically neutral civic-data prototype for showing what changed over time and what public evidence can support across all 28 Indian states and 8 union territories.
 
-This repository is a public-safe website foundation. Version 2.2 expands the history route with a four-source national register map, 29 individually reviewed freedom-movement profiles, six source-linked event records, and the complete published Cellular Jail province aggregate. It also retains the official NHM MIS operational ambulance fleet across ALS, BLS, patient-transport, boat, bike and other categories for all 36 jurisdictions, all-state comparison/export, production Postgres evidence storage and protected editorial workflows. It is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
+This repository is a public-safe website foundation. Version 2.3 adds a source-linked 80th Independence Day edition covering national and all-36-jurisdiction NCRB evidence on crimes against women, rape, girl-child POCSO cases and SC/ST atrocities; national NFHS and UDISE+ context; and an explicit POSH/ICC publication gap. Version 2.2 expanded the history route with a four-source national register map, 29 individually reviewed freedom-movement profiles, six source-linked event records, and the complete published Cellular Jail province aggregate. The dashboard is **not** a complete historical or scheme database, a lender, a public authority, an emergency-warning service, or a system for rating political parties or governments.
 
 ## What the prototype includes
 
 - all 36 jurisdictions in the navigation and data model;
+- `/independence-day`, a video-ready evidence edition for 15 August 2026 with an all-state NCRB table, national NFHS/UDISE+ context, explicit definitional cautions and POSH/ICC coverage disclosure;
 - a dedicated, shareable `/state/[jurisdiction]` page for every state and union territory;
 - `/explore`, a searchable/filterable national evidence directory;
 - `/compare`, a definition-preserving two-jurisdiction comparison without a composite score;

@@ -136,6 +136,21 @@ test("pre-renders a document-first freedom movement and contested-history archiv
   assert.match(catalog,/Freedom movement people, documents and disputes/);
 });
 
+test("pre-renders the Independence Day equity evidence edition",async()=>{
+  const html=await renderStaticPage("independence-day");
+  assert.match(html,/Happy 80th/);
+  assert.match(html,/79 years completed/);
+  assert.match(html,/4,48,211/);
+  assert.match(html,/Girl-child POCSO/);
+  assert.match(html,/57,789/);
+  assert.match(html,/All-state official evidence/);
+  assert.match(html,/POSH · new SHe-Box portal/);
+  assert.match(html,/not the total handled by every employer Internal Committee/i);
+  assert.match(html,/No complete current public aggregate/);
+  assert.match(html,/Racism \/ ethnicity/);
+  assert.match(html,/political interpretation, not a police crime classification/i);
+});
+
 test("pre-renders transport finance, service and audit evidence", async () => {
   const html = await renderInfrastructure();
   assert.match(html, /Built, financed, charged/);
