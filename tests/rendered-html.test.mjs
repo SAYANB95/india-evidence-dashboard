@@ -47,6 +47,7 @@ test("server-renders the India Evidence Dashboard", async () => {
   assert.match(html, /Active browsers/);
   assert.match(html, /Anonymous visitors recorded/);
   assert.match(html, /No names or raw IP addresses are stored/);
+  assert.match(html, /Flag of India/);
   assert.match(html, /All data/);
   assert.match(html, /GDP, state output/);
   assert.match(html, /36/);

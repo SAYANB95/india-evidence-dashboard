@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 
 type VisitorStats = {
   status: "available";
@@ -77,5 +78,6 @@ export default function VisitorCounter() {
       <div className="visitor-stat"><strong>{stats ? stats.totalVisitors.toLocaleString("en-IN") : "—"}</strong><span>Anonymous visitors recorded</span></div>
       <p className="visitor-note">“Active” means seen in the last {stats?.activeWindowMinutes ?? 5} minutes. No names or raw IP addresses are stored.</p>
     </>}
+    <Image className="visitor-flag" src="/india-flag.svg" alt="" width={54} height={36} aria-hidden="true" priority />
   </section>;
 }

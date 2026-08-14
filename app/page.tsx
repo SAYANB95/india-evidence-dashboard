@@ -560,7 +560,7 @@ export default function Home() {
       </aside>}
 
       <section className="independence-banner" aria-label="80th Independence Day evidence edition">
-        <div className="mini-flag" aria-hidden="true"><i/><span>✺</span><b/></div>
+        <Image className="mini-flag" src="/india-flag.svg" alt="Flag of India" width={108} height={72} priority />
         <div><p>15 AUGUST 2026 · 79 YEARS COMPLETED</p><h2>Happy 80th Independence Day.</h2><span>Where are we—and are we moving in a better direction or a worse one?</span></div>
         <a href="/independence-day">Open the Independence Day evidence edition →</a>
       </section>

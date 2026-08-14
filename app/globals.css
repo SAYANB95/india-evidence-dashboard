@@ -149,7 +149,7 @@ button { color: inherit; }
   min-height: 72px;
   padding: 12px clamp(20px, 5vw, 76px);
   display: grid;
-  grid-template-columns: minmax(175px,1fr) auto auto minmax(250px,1.25fr);
+  grid-template-columns: minmax(175px,1fr) auto auto minmax(250px,1.25fr) 54px;
   align-items: center;
   gap: clamp(18px,3vw,46px);
   color: white;
@@ -162,16 +162,18 @@ button { color: inherit; }
 .visitor-stat strong { display:block;font:560 27px/1 var(--font-display),sans-serif;color:white;font-variant-numeric:tabular-nums; }
 .visitor-stat span { display:block;margin-top:5px;color:rgba(255,255,255,.68);font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase; }
 .visitor-note,.visitor-unavailable { margin:0;color:rgba(255,255,255,.62);font-size:10px;line-height:1.5; }
-.visitor-unavailable { grid-column:2/-1; }
+.visitor-unavailable { grid-column:2/5; }
+.visitor-flag { width:54px;height:36px;display:block;border:1px solid rgba(255,255,255,.35);box-shadow:0 5px 16px rgba(0,0,0,.16); }
 @keyframes visitor-pulse { 50% { opacity:.55;box-shadow:0 0 0 8px rgba(119,214,166,.05); } }
 @media (prefers-reduced-motion:reduce) { .visitor-ribbon-title i { animation:none; } }
 
 @media(max-width:760px) {
-  .visitor-ribbon { grid-template-columns:1fr 1fr;gap:13px 18px;padding-top:16px;padding-bottom:16px; }
-  .visitor-ribbon-title { grid-column:1/-1; }
+  .visitor-ribbon { position:relative;grid-template-columns:1fr 1fr;gap:13px 18px;padding-top:16px;padding-bottom:16px; }
+  .visitor-ribbon-title { grid-column:1/-1;padding-right:70px; }
   .visitor-stat { min-width:0;padding-left:13px; }
   .visitor-stat strong { font-size:24px; }
   .visitor-note,.visitor-unavailable { grid-column:1/-1; }
+  .visitor-flag { position:absolute;right:20px;top:14px;width:48px;height:32px; }
 }
 
 .site-header { 
